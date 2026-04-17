@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Digital Twin Implementation Guide — NeuraTwin.in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+.sidebar-nav { display: flex; flex-direction: column; gap: 0; }
+.sidebar-nav a { padding: 12px 16px; border-left: 3px solid transparent; color: var(--text-muted); font-size: .9rem; transition: var(--transition); }
+.sidebar-nav a:hover, .sidebar-nav a.active { border-left-color: var(--navy); color: var(--navy); background: var(--bg); }
+.steps { display: flex; flex-direction: column; gap: 24px; margin: 32px 0; }
+.step { display: flex; gap: 20px; }
+.step-num { width: 50px; height: 50px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.2rem; flex-shrink: 0; }
+.step-content h4 { color: var(--navy); margin-bottom: 8px; }
+.step-content p { font-size: .9rem; margin-bottom: 10px; }
+.step-content ul { margin-left: 20px; }
+.step-content li { margin-bottom: 6px; font-size: .9rem; }
+.table-wrap { overflow-x: auto; margin: 24px 0; }
+table { width: 100%; border-collapse: collapse; }
+table th { background: var(--navy); color: #fff; padding: 12px 16px; text-align: left; font-weight: 600; font-size: .9rem; }
+table td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: .85rem; }
+table tr:hover { background: var(--bg); }
+.priority-high { color: #dc2626; font-weight: 600; }
+.priority-medium { color: var(--saffron); font-weight: 600; }
+.priority-low { color: var(--green); font-weight: 600; }
+.program-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 32px 0; }
+.program-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.program-card h4 { color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.program-card .program-meta { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; font-size: .85rem; }
+.program-meta-item { display: flex; gap: 8px; }
+.program-meta-item i { color: var(--teal); }
+.download-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 32px 0; }
+.download-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; transition: var(--transition); }
+.download-card:hover { border-color: var(--blue); box-shadow: var(--shadow); }
+.download-card i { font-size: 2rem; color: var(--blue); margin-bottom: 12px; display: block; }
+.download-card h5 { color: var(--navy); margin-bottom: 8px; }
+.download-card p { font-size: .8rem; color: var(--text-muted); margin-bottom: 12px; }
+.download-card button { background: var(--blue); color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left"><span><i class="fa fa-location-dot"></i> New Delhi, India</span><span>|</span><span>Updated: April 2026</span></div>
+    <div class="topbar-right"><a href="mailto:info@neuratwin.in"><i class="fa fa-envelope"></i> info@neuratwin.in</a><div class="topbar-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">NT</div>
+        <div class="logo-text"><div class="name">NeuraTwin<span style="color:var(--teal)">.in</span></div><div class="tag">GIS · Digital Twin · Policy Intelligence</div></div>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html"><i class="fa fa-house"></i> Home</a></li>
+          <li class="nav-dropdown"><a href="#"><i class="fa fa-layer-group"></i> Modules <i class="fa fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+              <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+              <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+              <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+              <a href="case-studies.html"><i class="fa fa-star"></i> Case Study Repository</a>
+              <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+              <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+              <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+            </div>
+          </li>
+          <li><a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a></li>
+          <li><a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> Tenders</a></li>
+          <li><a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search"><i class="fa fa-magnifying-glass"></i><input type="text" placeholder="Search DT framework…"/></div>
+        <button class="btn-login"><i class="fa fa-user"></i> Login</button>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close"><i class="fa fa-xmark"></i></button>
+  <a href="index.html"><i class="fa fa-house"></i> Home</a>
+  <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+  <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+  <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+  <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+  <a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a>
+  <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+  <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+  <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb"><div class="container"><ol><li><a href="index.html"><i class="fa fa-house"></i> Home</a></li><li class="current">Digital Twin Implementation Guide</li></ol></div></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge"><i class="fa fa-cube"></i> Module 03 · Framework · ULB · Smart Cities · AMRUT</div>
+    <h1>Digital Twin Implementation Guide</h1>
+    <p>End-to-end framework for implementing city digital twins in India. From concept to operationalisation — covering data layers, implementation phases, regulatory compliance, and proven methodologies.</p>
+    <div class="page-hero-meta">
+      <div class="hero-stat"><div class="num" data-count="6">6</div><div class="lbl">Implementation Phases</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="38">38</div><div class="lbl">Checklists</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="12">12</div><div class="lbl">Frameworks</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="3">3</div><div class="lbl">City Pilots</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<section class="section-sm">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start;">
+      <aside class="sidebar">
+        <div class="sidebar-header"><i class="fa fa-list"></i> Framework Sections</div>
+        <nav class="sidebar-nav">
+          <a href="#what-is-dt" class="active">What is a DT?</a>
+          <a href="#framework">Implementation Framework</a>
+          <a href="#data-layers">Data Layers Required</a>
+          <a href="#program-guidance">Program Guidance</a>
+          <a href="#downloads">Checklist Downloads</a>
+        </nav>
+      </aside>
+
+      <main>
+        <!-- What is DT -->
+        <div id="what-is-dt" class="mb-40">
+          <h2>What is a Digital Twin for Indian Cities?</h2>
+          <p style="margin-bottom: 16px; margin-top: 16px;">A Digital Twin (DT) is a comprehensive, dynamic, and spatial virtual representation of a city integrating real-time and historical data across multiple dimensions — physical infrastructure, utilities, social systems, and governance processes. For Indian cities, digital twins serve as decision-support platforms for urban planning, service delivery optimization, and real-time operational management.</p>
+          <p style="margin-bottom: 16px;">Unlike static GIS maps or municipal databases, a digital twin is a living system that continuously updates with real-time sensor data, satellite imagery, municipal transactions, and citizen feedback. It enables stakeholders to visualize city dynamics, simulate interventions, forecast impacts, and optimize service delivery. A DT for Bhopal, for instance, visualizes building locations, utility networks, sensor data from water treatment plants and traffic intersections, citizen grievances spatially mapped by ward, and dynamic dashboards showing real-time operational metrics.</p>
+          <p style="margin-bottom: 24px;">Key differentiators of a DT vs. traditional GIS: (1) Real-time data integration from multiple sources; (2) 3D city model with semantic richness; (3) Simulation and what-if analysis capabilities; (4) Citizen-facing interfaces enabling public participation; (5) Integration with IoT sensor networks and smart city systems; (6) Continuous learning and improvement through feedback loops.</p>
+
+          <div class="alert alert-warn" style="margin-bottom: 24px;"><i class="fa fa-triangle-exclamation"></i><div><strong>Regulatory Framework Gap:</strong> India lacks a dedicated Digital Twin policy or standards. Current implementation relies on interpretations of NSDI guidelines, Smart Cities Mission operational requirements, AMRUT framework, and sector-specific regulations (DILRMP for land records, Power Sector rules, Water Management guidelines). Early adopter cities benefit from policy flexibility but face long-term sustainability and interoperability challenges.</div></div>
+        </div>
+
+        <!-- Implementation Framework -->
+        <div id="framework" class="mb-40">
+          <h2>Implementation Framework: 6 Phases</h2>
+
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>Assessment & Feasibility (3-4 months)</h4>
+                <p>Foundation-setting phase identifying city context, requirements, and implementation capacity.</p>
+                <ul>
+                  <li><strong>Data Audit:</strong> Inventory existing GIS data, satellite imagery, municipal databases, IoT infrastructure. Identify gaps and data quality issues.</li>
+                  <li><strong>Stakeholder Mapping:</strong> Engage Urban Local Body (ULB) departments, utilities, citizens, academia, private sector. Build governance structure and steering committee.</li>
+                  <li><strong>Technology Assessment:</strong> Evaluate available tech stack options (open-source vs. proprietary), cloud vs. on-prem, build vs. buy trade-offs.</li>
+                  <li><strong>Budget Planning:</strong> Estimate costs across data acquisition, platform, implementation, training, 3-year O&M. Explore AMRUT, Smart Cities, state budget funding.</li>
+                  <li><strong>Feasibility Report:</strong> Document findings, risks, phasing strategy, and go/no-go recommendation.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>Data Acquisition (4-6 months)</h4>
+                <p>Comprehensive data collection and preparation for DT ingestion.</p>
+                <ul>
+                  <li><strong>Drone Surveys:</strong> High-resolution orthomosaic imagery and DEM for urban areas. Validate SoI orthophoto accuracy against drone data.</li>
+                  <li><strong>GIS Data Collection:</strong> Building footprints (via digitisation or ESRI/Google building layer), road network, utility corridors, land use classification.</li>
+                  <li><strong>IoT Sensors:</strong> Deploy traffic counters, air quality monitors, water level sensors, weather stations, structural health monitoring on critical infrastructure.</li>
+                  <li><strong>Legacy Digitisation:</strong> Scan and vectorise municipal revenue maps, water/sewerage schematic plans, electricity distribution diagrams.</li>
+                  <li><strong>Data Standardisation:</strong> Harmonise projection (WGS84 UTM), attribute schemas, naming conventions across sources per NSDI standards.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>Platform Architecture (2-3 months)</h4>
+                <p>Technology and infrastructure design for DT deployment.</p>
+                <ul>
+                  <li><strong>Cloud vs. On-Premises:</strong> Assess cost, security, compliance requirements. MeitY cloud policy mandates use of empanelled CSPs for sensitive data (land, citizen PII).</li>
+                  <li><strong>Tech Stack Selection:</strong> GIS engine (QGIS/PostGIS for open-source, ArcGIS for proprietary), 3D rendering (CesiumJS, Unreal Engine), data management, API layer.</li>
+                  <li><strong>API Design:</strong> Define REST APIs for third-party integrations with municipal systems (grievance, tax, health), smart city platforms, and citizen apps.</li>
+                  <li><strong>Security & Compliance:</strong> Design data access controls (citizen-facing vs. admin-only layers), encryption, audit logging. Ensure DPDP compliance for citizen data.</li>
+                  <li><strong>Scalability Planning:</strong> Capacity estimates for storage, compute, concurrent users. Plan horizontal scaling as city grows or new data layers added.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <h4>Data Integration & ETL (2-3 months)</h4>
+                <p>Pipeline development for continuous data ingestion and synchronisation.</p>
+                <ul>
+                  <li><strong>ETL Pipeline:</strong> Build Extract-Transform-Load processes for static layers (monthly municipal updates) and real-time streams (IoT, grievances).</li>
+                  <li><strong>Real-time Feeds:</strong> Integrate SCADA systems (water, power), traffic management systems, building management systems via APIs or message queues (MQTT, Kafka).</li>
+                  <li><strong>Spatial Database:</strong> PostGIS or Oracle Spatial for storing vector and raster data. Optimise queries for zoom-level performance.</li>
+                  <li><strong>Version Control:</strong> Maintain historical snapshots (yearly/seasonal) for change analysis and trend monitoring.</li>
+                  <li><strong>Data Quality Assurance:</strong> Implement validation rules, anomaly detection, and manual review workflows before data publication.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">5</div>
+              <div class="step-content">
+                <h4>Twin Modelling & Simulation (3-4 months)</h4>
+                <p>Building the semantic and simulation layers of the digital twin.</p>
+                <ul>
+                  <li><strong>3D City Model:</strong> LOD2/LOD3 building models (height, texture). Use CityGML standard for interoperability. Generate from drone LiDAR or footprint+height attribute.</li>
+                  <li><strong>Semantic Layers:</strong> Rich attribute tagging (building use, ownership, service connections, historical heritage status). Link spatial objects to municipal transactional systems.</li>
+                  <li><strong>Simulation Modules:</strong> Develop agent-based models for urban growth, traffic simulation, water distribution optimisation, crowd management for public events.</li>
+                  <li><strong>Scenario Planning:</strong> Implement what-if modules (e.g., impact of new metro line on traffic; flood extent under different rainfall scenarios; service coverage if new water tank built).</li>
+                  <li><strong>Dashboard Development:</strong> Create KPI visualisations (ward-level service coverage, infrastructure asset age, grievance response time, utility efficiency).</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">6</div>
+              <div class="step-content">
+                <h4>Operationalisation & GoLive (1-2 months)</h4>
+                <p>Transition to production and sustained operation.</p>
+                <ul>
+                  <li><strong>Live Monitoring:</strong> Activate real-time data feeds and sensor streams. Configure alerts for anomalies (pipe burst, traffic congestion, air quality breach).</li>
+                  <li><strong>Citizen Interface:</strong> Launch public portal or mobile app allowing citizens to view service status, report grievances, access permit information, view plans.</li>
+                  <li><strong>Staff Training:</strong> Intensive training for ULB departments, utility operators, and planning staff on system navigation, data entry, report generation.</li>
+                  <li><strong>SLA & Governance:</strong> Define service level agreements (platform uptime 99.5%, data freshness <1 day). Establish change control and continuous improvement processes.</li>
+                  <li><strong>Continuous Improvement:</strong> Quarterly reviews of system performance, user feedback, emerging use cases. Plan Phase 2 enhancements (e.g., AR for field teams, predictive maintenance).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Layers -->
+        <div id="data-layers" class="mb-40">
+          <h2>Data Layers Required for City Digital Twin</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 18%;">Data Layer</th>
+                  <th style="width: 22%;">Primary Data Source</th>
+                  <th style="width: 15%;">Update Frequency</th>
+                  <th style="width: 18%;">Format</th>
+                  <th style="width: 12%;">Priority</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Base Map (Topography)</strong></td>
+                  <td>Survey of India OSM, Sentinel-2 15m resolution</td>
+                  <td>Annual</td>
+                  <td>Raster GeoTIFF, Vector Shapefile</td>
+                  <td><span class="priority-high">High</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Building Footprints</strong></td>
+                  <td>Drone survey (>2cm GSD), Google Building Layer, digitisation</td>
+                  <td>Biennial</td>
+                  <td>Vector Polygon (GeoJSON/Shapefile)</td>
+                  <td><span class="priority-high">High</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Road Network</strong></td>
+                  <td>OSM, Google Maps, municipal survey</td>
+                  <td>Quarterly (updates)</td>
+                  <td>Vector Linestring (GeoJSON)</td>
+                  <td><span class="priority-high">High</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Utility Networks (Water, Sewerage, Power, Telecom)</strong></td>
+                  <td>ULB departments, utility operators, legacy schematics</td>
+                  <td>Monthly</td>
+                  <td>Vector Linestring + Node (Shapefile/GeoJSON)</td>
+                  <td><span class="priority-high">High</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Green Cover & Vegetation</strong></td>
+                  <td>Sentinel-2 NDVI analysis, drone imagery, municipal tree inventory</td>
+                  <td>Quarterly</td>
+                  <td>Raster (GeoTIFF), Vector Polygon</td>
+                  <td><span class="priority-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Elevation Model (DEM)</strong></td>
+                  <td>SRTM 30m, ALOS PALSAR 12.5m, Drone LiDAR (high-precision areas)</td>
+                  <td>One-time + updates</td>
+                  <td>Raster GeoTIFF (Float32)</td>
+                  <td><span class="priority-high">High</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Land Use / Land Cover</strong></td>
+                  <td>Satellite classification (Sentinel-2), municipal land use plan</td>
+                  <td>Annual</td>
+                  <td>Raster (GeoTIFF, 10m), Vector (Polygon)</td>
+                  <td><span class="priority-high">High</span></td>
+                </tr>
+                <tr>
+                  <td><strong>IoT Sensor Data</strong></td>
+                  <td>Air quality, water quality, traffic, weather stations (deployed)</td>
+                  <td>Real-time (hourly/daily aggregation)</td>
+                  <td>Time-series (JSON/CSV), spatially linked</td>
+                  <td><span class="priority-high">High</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Citizen Grievances (Spatialised)</strong></td>
+                  <td>Municipal grievance portal (CPGRAMS, municipal system)</td>
+                  <td>Real-time</td>
+                  <td>Point with attributes (GeoJSON)</td>
+                  <td><span class="priority-medium">Medium</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Administrative Boundaries</strong></td>
+                  <td>ULB records (ward, zone, circle, property limits)</td>
+                  <td>Annual (updates)</td>
+                  <td>Vector Polygon (Shapefile)</td>
+                  <td><span class="priority-high">High</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Heritage & Cultural Assets</strong></td>
+                  <td>State archaeology dept, cultural resource survey</td>
+                  <td>Static (periodic updates)</td>
+                  <td>Vector Point/Polygon</td>
+                  <td><span class="priority-low">Low</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Population & Demographic</strong></td>
+                  <td>Census gridded data, ward-level ULB records</td>
+                  <td>Annual (decennial Census)</td>
+                  <td>Point/Grid (GeoJSON), Tabular</td>
+                  <td><span class="priority-medium">Medium</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Program Guidance -->
+        <div id="program-guidance" class="mb-40">
+          <h2>Program-wise Digital Twin Guidance</h2>
+          <div class="program-cards">
+            <div class="program-card">
+              <h4><i class="fa fa-city"></i> AMRUT 2.0</h4>
+              <p>Atal Mission for Rejuvenation and Urban Transformation (Phase 2) focuses on water security, sanitation, green space, and smart solutions.</p>
+              <div class="program-meta">
+                <div class="program-meta-item"><i class="fa fa-coins"></i> <strong>Budget Range:</strong> ₹250–500 Cr per city</div>
+                <div class="program-meta-item"><i class="fa fa-star"></i> <strong>Eligibility:</strong> Cities >1 lakh population, weak service coverage</div>
+                <div class="program-meta-item"><i class="fa fa-map"></i> <strong>DT Scope:</strong> Water supply mapping, utility network optimisation, citizen service portal, water loss detection via sensor networks</div>
+              </div>
+              <p style="font-size: .85rem; color: var(--text-muted); margin-top: 12px;"><strong>Implementation Tip:</strong> Integrate AMRUT project spatial data (pipelines, treatment plants) into the DT framework. Use sensor data from water systems for real-time monitoring and predictive maintenance.</p>
+            </div>
+
+            <div class="program-card">
+              <h4><i class="fa fa-building"></i> Smart Cities Mission</h4>
+              <p>Central scheme for developing smart solutions across 100 Indian cities via area-based development and city-wide projects.</p>
+              <div class="program-meta">
+                <div class="program-meta-item"><i class="fa fa-coins"></i> <strong>Budget Range:</strong> ₹500–2,000 Cr per city (50% central + state/ULB)</div>
+                <div class="program-meta-item"><i class="fa fa-star"></i> <strong>Eligibility:</strong> Cities selected via competitive challenge process, demonstrated governance readiness</div>
+                <div class="program-meta-item"><i class="fa fa-map"></i> <strong>DT Scope:</strong> Integrated Command Centre (ICC), traffic management, IoT-enabled public services, digital governance platform, real-time city dashboards</div>
+              </div>
+              <p style="font-size: .85rem; color: var(--text-muted); margin-top: 12px;"><strong>Implementation Tip:</strong> DT serves as the backend data layer for Smart Cities ICC. Ensure APIs connect all smart city subsystems (smart parking, intelligent traffic, public WiFi, solar monitoring).</p>
+            </div>
+
+            <div class="program-card">
+              <h4><i class="fa fa-network-wired"></i> PM Gati Shakti</h4>
+              <p>National Master Plan integrating multimodal logistics networks and transport corridors with spatial data infrastructure for seamless movement.</p>
+              <div class="program-meta">
+                <div class="program-meta-item"><i class="fa fa-coins"></i> <strong>Budget Range:</strong> ₹111,271 Cr (2021-27) across modes</div>
+                <div class="program-meta-item"><i class="fa fa-star"></i> <strong>Eligibility:</strong> All central, state, local authority transport infrastructure</div>
+                <div class="program-meta-item"><i class="fa fa-map"></i> <strong>DT Scope:</strong> Multimodal corridor mapping, logistics hub location optimisation, supply chain visibility, inter-city connectivity DT linking regional cities</div>
+              </div>
+              <p style="font-size: .85rem; color: var(--text-muted); margin-top: 12px;"><strong>Implementation Tip:</strong> City DTs should integrate with PM Gati Shakti national DT to share inter-city connectivity data, logistics volumes, and economic activity hotspots.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checklist Downloads -->
+        <div id="downloads" class="mb-40">
+          <h2>Downloadable Implementation Checklists</h2>
+          <div class="download-cards">
+            <div class="download-card">
+              <i class="fa fa-check-double"></i>
+              <h5>Pre-Deployment Checklist</h5>
+              <p>15-point assessment before DT platform goes live — stakeholder readiness, data completeness, system testing, training completion.</p>
+              <button><i class="fa fa-download"></i> Download PDF</button>
+            </div>
+            <div class="download-card">
+              <i class="fa fa-database"></i>
+              <h5>Data Audit Template</h5>
+              <p>Excel template for documenting existing GIS data, identifying gaps, assessing quality, and estimating acquisition costs and timelines.</p>
+              <button><i class="fa fa-download"></i> Download XLSX</button>
+            </div>
+            <div class="download-card">
+              <i class="fa fa-briefcase"></i>
+              <h5>Vendor Evaluation Matrix</h5>
+              <p>Comparative scorecard for evaluating GIS platforms, DT software, cloud providers, and implementation partners on 30+ criteria.</p>
+              <button><i class="fa fa-download"></i> Download XLSX</button>
+            </div>
+            <div class="download-card">
+              <i class="fa fa-rocket"></i>
+              <h5>Go-Live Checklist</h5>
+              <p>Final readiness assessment covering data refresh, system performance, user access provisioning, communication plan, and rollback procedures.</p>
+              <button><i class="fa fa-download"></i> Download PDF</button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap"><div class="logo-icon" style="width:40px;height:40px;background:linear-gradient(135deg,#2d5282,#0891b2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;">NT</div><div><div class="site-name">NeuraTwin.in</div><div class="tagline">GIS · Digital Twin · Policy Intelligence</div></div></div>
+      <p>India's definitive platform for GIS, Digital Twin, and e-governance policy intelligence.</p>
+      <div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div class="footer-col"><h5>Modules</h5><ul>
+      <li><a href="policy-library.html"><i class="fa fa-chevron-right"></i> Policy Library</a></li>
+      <li><a href="knowledge-base.html"><i class="fa fa-chevron-right"></i> Knowledge Base</a></li>
+      <li><a href="dt-guide.html"><i class="fa fa-chevron-right"></i> Digital Twin Guide</a></li>
+      <li><a href="rfp-intelligence.html"><i class="fa fa-chevron-right"></i> RFP Intelligence</a></li>
+      <li><a href="case-studies.html"><i class="fa fa-chevron-right"></i> Case Studies</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="#"><i class="fa fa-chevron-right"></i> About NeuraTwin</a></li>
+      <li><a href="compliance-compass.html"><i class="fa fa-chevron-right"></i> Compliance Compass</a></li>
+      <li><a href="tech-evaluator.html"><i class="fa fa-chevron-right"></i> Tech Evaluator</a></li>
+      <li><a href="policy-watch.html"><i class="fa fa-chevron-right"></i> Policy Watch</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Policy Alerts</h5><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:12px;">Get notified on new acts, amendments, and circulars.</p><div class="newsletter-form"><input type="email" placeholder="your@email.com"/><button>Subscribe</button></div></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p>© 2026 NeuraTwin.in · Not affiliated with any government body.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div></div></div>
+</footer>
+
+<button class="back-top"><i class="fa fa-arrow-up"></i></button>
+<script src="js/main.js"></script>
+<script>
+document.querySelectorAll('.sidebar-nav a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

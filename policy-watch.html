@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Policy Watch — NeuraTwin.in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+.live-update { display: inline-flex; align-items: center; gap: 6px; color: #dc2626; font-size: .85rem; font-weight: 600; }
+.live-dot-small { width: 8px; height: 8px; background: #dc2626; border-radius: 50%; animation: pulse 1.5s infinite; }
+.news-feed { display: flex; flex-direction: column; gap: 16px; }
+.news-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; border-left: 4px solid var(--navy); transition: var(--transition); }
+.news-card:hover { box-shadow: var(--shadow); }
+.news-card h4 { color: var(--navy); margin-bottom: 8px; font-size: .95rem; line-height: 1.4; }
+.news-date { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--text-light); margin-bottom: 12px; }
+.news-date i { color: var(--text-muted); }
+.news-body { font-size: .85rem; color: var(--text-muted); line-height: 1.6; }
+.news-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-lt); font-size: .8rem; }
+.news-badge { background: var(--bg); padding: 4px 10px; border-radius: 4px; color: var(--text-muted); }
+.news-badge.mohaua { background: #dbeafe; color: #1d4ed8; }
+.news-badge.dolr { background: #ede9fe; color: #6d28d9; }
+.news-badge.meity { background: #dcfce7; color: #15803d; }
+.news-badge.dst { background: #cffafe; color: #0e7490; }
+.news-badge.mord { background: #fed7aa; color: #c2410c; }
+.sidebar-right { width: 300px; display: flex; flex-direction: column; gap: 20px; }
+.ministry-widget { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+.ministry-widget h5 { color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; font-size: .95rem; }
+.ministry-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-lt); font-size: .85rem; }
+.ministry-item:last-child { border-bottom: none; }
+.ministry-item .name { font-weight: 600; }
+.ministry-item .activity { font-size: .75rem; color: var(--text-light); }
+.activity-indicator { width: 8px; height: 8px; border-radius: 50%; }
+.activity-indicator.active { background: var(--green); }
+.activity-indicator.pending { background: var(--saffron); }
+.subscribe-card { background: linear-gradient(135deg,var(--navy),var(--navy-light)); color: #fff; padding: 20px; border-radius: var(--radius); }
+.subscribe-card h5 { color: #fff; margin-bottom: 12px; }
+.subscribe-card p { font-size: .8rem; color: rgba(255,255,255,.8); margin-bottom: 12px; }
+.subscribe-card input { width: 100%; padding: 8px 12px; border: none; border-radius: 4px; margin-bottom: 8px; }
+.subscribe-card button { width: 100%; padding: 8px 12px; background: var(--teal); color: #fff; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; }
+.related-reports { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+.related-reports h5 { color: var(--navy); margin-bottom: 12px; }
+.related-reports ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.related-reports a { font-size: .85rem; color: var(--blue); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+.related-reports a:hover { text-decoration: underline; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left"><span><i class="fa fa-location-dot"></i> New Delhi, India</span><span>|</span><span>Updated: April 2026</span></div>
+    <div class="topbar-right"><a href="mailto:info@neuratwin.in"><i class="fa fa-envelope"></i> info@neuratwin.in</a><div class="topbar-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">NT</div>
+        <div class="logo-text"><div class="name">NeuraTwin<span style="color:var(--teal)">.in</span></div><div class="tag">GIS · Digital Twin · Policy Intelligence</div></div>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html"><i class="fa fa-house"></i> Home</a></li>
+          <li class="nav-dropdown"><a href="#"><i class="fa fa-layer-group"></i> Modules <i class="fa fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+              <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+              <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+              <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+              <a href="case-studies.html"><i class="fa fa-star"></i> Case Study Repository</a>
+              <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+              <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+              <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+            </div>
+          </li>
+          <li><a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a></li>
+          <li><a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> Tenders</a></li>
+          <li><a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search"><i class="fa fa-magnifying-glass"></i><input type="text" placeholder="Search news…"/></div>
+        <button class="btn-login"><i class="fa fa-user"></i> Login</button>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close"><i class="fa fa-xmark"></i></button>
+  <a href="index.html"><i class="fa fa-house"></i> Home</a>
+  <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+  <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+  <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+  <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+  <a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a>
+  <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+  <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+  <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb"><div class="container"><ol><li><a href="index.html"><i class="fa fa-house"></i> Home</a></li><li class="current">Policy Watch</li></ol></div></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge"><i class="fa fa-newspaper"></i> Module 08 · Daily Updates · Policy Intelligence</div>
+    <h1>Policy Watch</h1>
+    <p>Real-time monitoring of policy developments, circulars, and regulatory updates from 8 key ministries and 14 state portals. Stay current on GIS, digital infrastructure, and e-governance policy landscape in India.</p>
+    <div class="page-hero-meta">
+      <div class="hero-stat"><div class="live-update"><span class="live-dot-small"></span>Daily Updates</div><div class="lbl">Real-time Feed</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="8">8</div><div class="lbl">Ministries Tracked</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="14">14</div><div class="lbl">State Portals</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="2400">2,400+</div><div class="lbl">Subscribers</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<section class="section-sm">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start;">
+      <!-- News Feed -->
+      <main class="news-feed">
+        <!-- News Item 1 -->
+        <div class="news-card">
+          <h4>MoHUA Releases Smart Cities 2.0 Operational Guidelines</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> April 15, 2026</div>
+          <div class="news-body">MoHUA issued revised operational guidelines for Smart Cities Mission Phase 2 (2026-31). Key changes: accelerated GIS-based city operations mandatory, integration with PM Gati Shakti for multimodal transport planning, mandatory Digital Twin frameworks for cities >1M population. RFP timeline extended to June 2026.</div>
+          <div class="news-meta">
+            <span class="news-badge mohaua"><i class="fa fa-building"></i> MoHUA</span>
+            <span class="news-badge">Circular</span>
+            <span class="news-badge">Policy Update</span>
+          </div>
+        </div>
+
+        <!-- News Item 2 -->
+        <div class="news-card">
+          <h4>DPDP Rules 2025 Compliance Deadline: 12 Months from Notification</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> April 10, 2026</div>
+          <div class="news-body">MeitY clarification on DPDP Act implementation timeline. Organizations processing significant personal data (>1M individuals) must achieve compliance by January 2026. GIS platforms collecting citizen data, grievance mapping systems, and property tax portals classified as Significant Data Fiduciaries. Non-compliance penalties: ₹50 Cr or 3% annual turnover.</div>
+          <div class="news-meta">
+            <span class="news-badge meity"><i class="fa fa-shield"></i> MeitY</span>
+            <span class="news-badge">Data Protection</span>
+            <span class="news-badge">Compliance</span>
+          </div>
+        </div>
+
+        <!-- News Item 3 -->
+        <div class="news-card">
+          <h4>Budget 2026: ₹950 Cr for DILRMP Phase II, ₹2,100 Cr for SVAMITVA Phase III</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> April 5, 2026</div>
+          <div class="news-body">Union Budget allocation for land records and rural property mapping. DILRMP Phase II focuses on integration with registration systems and grievance redressal. SVAMITVA Phase III expands to 35,000 villages (UP, MP, Rajasthan priority). GIS-based property mapping and drone surveys remain core activities. State bidding now open via CPP Portal.</div>
+          <div class="news-meta">
+            <span class="news-badge dolr"><i class="fa fa-coins"></i> DoLR</span>
+            <span class="news-badge">Budget</span>
+            <span class="news-badge">Funding</span>
+          </div>
+        </div>
+
+        <!-- News Item 4 -->
+        <div class="news-card">
+          <h4>DST/NRSC Opens High-Resolution Geospatial Data Portal</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> March 28, 2026</div>
+          <div class="news-body">Bhuvan portal upgraded with 1m-resolution satellite imagery covering 50% of India. Free access for government agencies; commercial licensing available for private sector. Geospatial data liberalisation further accelerated under DST guidelines. Drone survey data ingestion expanded — civil survey companies can now contribute validated orthomosaics to national repository.</div>
+          <div class="news-meta">
+            <span class="news-badge dst"><i class="fa fa-satellite"></i> DST/NRSC</span>
+            <span class="news-badge">Data Release</span>
+            <span class="news-badge">Infrastructure</span>
+          </div>
+        </div>
+
+        <!-- News Item 5 -->
+        <div class="news-card">
+          <h4>Smart Cities International Benchmarking: India Ranks 7th in Asia-Pacific</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> March 20, 2026</div>
+          <div class="news-body">Asia-Pacific Smart City Index 2026 released. Singapore (1st), South Korea (2nd), India (7th) with notable progress in GIS integration and IoT deployment. Bhopal, Pune, Surat recognized for advanced digital twin implementations. Ranking reflects increasing maturity of India's urban GIS ecosystem and policy momentum from Smart Cities Mission.</div>
+          <div class="news-meta">
+            <span class="news-badge mohaua"><i class="fa fa-city"></i> MoHUA</span>
+            <span class="news-badge">Global Recognition</span>
+            <span class="news-badge">Smart Cities</span>
+          </div>
+        </div>
+
+        <!-- News Item 6 -->
+        <div class="news-card">
+          <h4>PM Gati Shakti National Master Plan GIS Portal Phase 1 Complete</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> March 12, 2026</div>
+          <div class="news-body">Cabinet-approved PM Gati Shakti GIS portal now live. Multimodal transport network visualization covering 97 lakh km of planned and existing corridors. Real-time project tracking, logistics optimization, and inter-ministerial coordination via unified spatial platform. 28 state governments, 15 ministries already integrated. City-level GIS systems can now sync with national DT.</div>
+          <div class="news-meta">
+            <span class="news-badge"><i class="fa fa-network-wired"></i> Cabinet/DPIIT</span>
+            <span class="news-badge">Infrastructure</span>
+            <span class="news-badge">National Initiative</span>
+          </div>
+        </div>
+
+        <!-- News Item 7 -->
+        <div class="news-card">
+          <h4>Maharashtra GIS Policy 2.0: Private Sector Participation Encouraged</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> March 5, 2026</div>
+          <div class="news-body">State cabinet approves updated GIS policy allowing private companies to contribute spatial data to state SDI. Revenue department opens GIS data access through API. New procurement model: build, operate, transfer (BOT) for city-scale digital twins. Expected ₹500 Cr investment from tech companies in next 24 months.</div>
+          <div class="news-meta">
+            <span class="news-badge"><i class="fa fa-map"></i> Maharashtra Govt</span>
+            <span class="news-badge">State Policy</span>
+            <span class="news-badge">Public-Private Partnership</span>
+          </div>
+        </div>
+
+        <!-- News Item 8 -->
+        <div class="news-card">
+          <h4>NSDI 2.0 Consultation Paper: Open Data + AI Integration</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> February 25, 2026</div>
+          <div class="news-body">DST releases consultation paper on National Spatial Data Infrastructure 2.0 emphasizing open data, machine learning for map updates, citizen-generated data integration, and real-time sensor feeds. Comments invited till April 30, 2026. Expected notification: June 2026. Will supersede NSDI 2021 guidelines with significant interoperability changes.</div>
+          <div class="news-meta">
+            <span class="news-badge dst"><i class="fa fa-globe"></i> DST</span>
+            <span class="news-badge">Consultation</span>
+            <span class="news-badge">Standards</span>
+          </div>
+        </div>
+
+        <!-- News Item 9 -->
+        <div class="news-card">
+          <h4>Pune Smart City Eyes ₹150 Cr Digital Twin Phase 2 RFP</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> February 18, 2026</div>
+          <div class="news-body">Pune Mahanagar Parivahan Mahamandal (PMRM) invites pre-bids for Phase 2 of Pune Digital Twin covering real-time traffic management, waste optimization, and predictive maintenance. Contract value ₹150 Cr (5 years). Integration with existing Smart City ICC mandatory. Bidding deadline: May 15, 2026.</div>
+          <div class="news-meta">
+            <span class="news-badge"><i class="fa fa-city"></i> Pune PMRM</span>
+            <span class="news-badge">Tender</span>
+            <span class="news-badge">Digital Twin</span>
+          </div>
+        </div>
+
+        <!-- News Item 10 -->
+        <div class="news-card">
+          <h4>NSIC Empanels 15 GIS Service Providers for Government Projects</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> February 10, 2026</div>
+          <div class="news-body">National Small Industries Corporation (NSIC) releases empanelment list of 15 GIS/surveying firms qualified for government contracts <₹5 Cr. Mix of startups and established agencies. NRSC training and certification mandated. Empanelment valid 3 years. Open to all Indian GIS companies meeting specified financial and technical criteria.</div>
+          <div class="news-meta">
+            <span class="news-badge"><i class="fa fa-briefcase"></i> NSIC</span>
+            <span class="news-badge">Procurement</span>
+            <span class="news-badge">Vendor Management</span>
+          </div>
+        </div>
+
+        <!-- News Item 11 -->
+        <div class="news-card">
+          <h4>Telangana DHARANI Portal: 50M+ Transactions, ₹8 Cr Revenue Collected</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> January 30, 2026</div>
+          <div class="news-body">DHARANI land record portal milestone: 50 million transactions processed since 2020 launch. GIS-based property verification reduces disputes. Online mutation processing now completes in 15 days vs. historical 60+ days. State reporting ₹8 Cr additional revenue through digitisation-driven transparency. Model adopted by Maharashtra, Gujarat, Odisha.</div>
+          <div class="news-meta">
+            <span class="news-badge dolr"><i class="fa fa-database"></i> Telangana DoLR</span>
+            <span class="news-badge">Success Story</span>
+            <span class="news-badge">Digital Transformation</span>
+          </div>
+        </div>
+
+        <!-- News Item 12 -->
+        <div class="news-card">
+          <h4>AIBP 2.0: Water GIS Mapping ₹75 Cr RFP Across 4 States</h4>
+          <div class="news-date"><i class="fa fa-calendar"></i> January 15, 2026</div>
+          <div class="news-body">Ministry of Water Resources (DoWR) announces ₹75 Cr tender for comprehensive water supply GIS mapping and utility optimization under AIBP 2.0 (Accelerated Inter-State Benefits Programme). 4 states: UP, MP, Chhattisgarh, Odisha. Contract includes drone surveying, network digitisation, and IoT sensor deployment for non-revenue water reduction.</div>
+          <div class="news-meta">
+            <span class="news-badge"><i class="fa fa-droplet"></i> DoWR</span>
+            <span class="news-badge">Tender</span>
+            <span class="news-badge">Water Infrastructure</span>
+          </div>
+        </div>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar-right">
+        <!-- Ministry Tracker -->
+        <div class="ministry-widget">
+          <h5><i class="fa fa-building"></i> Ministry Tracker</h5>
+          <div class="ministry-item">
+            <span class="name">MoHUA</span>
+            <div style="text-align: right;">
+              <div class="activity-indicator active"></div>
+              <div class="activity">Last: Today</div>
+            </div>
+          </div>
+          <div class="ministry-item">
+            <span class="name">DoLR</span>
+            <div style="text-align: right;">
+              <div class="activity-indicator active"></div>
+              <div class="activity">Last: 2d ago</div>
+            </div>
+          </div>
+          <div class="ministry-item">
+            <span class="name">MeitY</span>
+            <div style="text-align: right;">
+              <div class="activity-indicator active"></div>
+              <div class="activity">Last: 5d ago</div>
+            </div>
+          </div>
+          <div class="ministry-item">
+            <span class="name">DST/NRSC</span>
+            <div style="text-align: right;">
+              <div class="activity-indicator active"></div>
+              <div class="activity">Last: 3d ago</div>
+            </div>
+          </div>
+          <div class="ministry-item">
+            <span class="name">MoRD</span>
+            <div style="text-align: right;">
+              <div class="activity-indicator pending"></div>
+              <div class="activity">Last: 10d ago</div>
+            </div>
+          </div>
+          <div class="ministry-item">
+            <span class="name">DoWR</span>
+            <div style="text-align: right;">
+              <div class="activity-indicator active"></div>
+              <div class="activity">Last: 8d ago</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subscribe Card -->
+        <div class="subscribe-card">
+          <h5><i class="fa fa-bell"></i> Subscribe to Alerts</h5>
+          <p>Get daily policy updates via email. Customize by ministry and sector.</p>
+          <input type="email" placeholder="Your email" />
+          <button><i class="fa fa-paper-plane"></i> Subscribe</button>
+        </div>
+
+        <!-- Related Reports -->
+        <div class="related-reports">
+          <h5><i class="fa fa-file-pdf"></i> Related Reports</h5>
+          <ul>
+            <li><a href="case-studies.html"><i class="fa fa-star"></i> SVAMITVA Phase I Case Study</a></li>
+            <li><a href="dt-guide.html"><i class="fa fa-cube"></i> DT Implementation Guide</a></li>
+            <li><a href="compliance-compass.html"><i class="fa fa-compass"></i> DPDP Compliance Framework</a></li>
+            <li><a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> Active Tender Database</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap"><div class="logo-icon" style="width:40px;height:40px;background:linear-gradient(135deg,#2d5282,#0891b2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;">NT</div><div><div class="site-name">NeuraTwin.in</div><div class="tagline">GIS · Digital Twin · Policy Intelligence</div></div></div>
+      <p>India's definitive platform for GIS, Digital Twin, and e-governance policy intelligence.</p>
+      <div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div class="footer-col"><h5>Modules</h5><ul>
+      <li><a href="policy-library.html"><i class="fa fa-chevron-right"></i> Policy Library</a></li>
+      <li><a href="knowledge-base.html"><i class="fa fa-chevron-right"></i> Knowledge Base</a></li>
+      <li><a href="dt-guide.html"><i class="fa fa-chevron-right"></i> Digital Twin Guide</a></li>
+      <li><a href="rfp-intelligence.html"><i class="fa fa-chevron-right"></i> RFP Intelligence</a></li>
+      <li><a href="case-studies.html"><i class="fa fa-chevron-right"></i> Case Studies</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="#"><i class="fa fa-chevron-right"></i> About NeuraTwin</a></li>
+      <li><a href="compliance-compass.html"><i class="fa fa-chevron-right"></i> Compliance Compass</a></li>
+      <li><a href="tech-evaluator.html"><i class="fa fa-chevron-right"></i> Tech Evaluator</a></li>
+      <li><a href="policy-watch.html"><i class="fa fa-chevron-right"></i> Policy Watch</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Policy Alerts</h5><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:12px;">Get notified on new acts, amendments, and circulars.</p><div class="newsletter-form"><input type="email" placeholder="your@email.com"/><button>Subscribe</button></div></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p>© 2026 NeuraTwin.in · Not affiliated with any government body.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div></div></div>
+</footer>
+
+<button class="back-top"><i class="fa fa-arrow-up"></i></button>
+<script src="js/main.js"></script>
+</body>
+</html>

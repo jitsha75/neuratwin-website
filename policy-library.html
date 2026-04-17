@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Policy & Regulatory Library — NeuraTwin.in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+.doc-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr)); gap: 20px; }
+.doc-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; transition: var(--transition); display: flex; flex-direction: column; gap: 10px; }
+.doc-card:hover { box-shadow: var(--shadow); border-color: var(--blue-light); transform: translateY(-2px); }
+.doc-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.doc-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.doc-card h4 { font-size: .92rem; color: var(--text); line-height: 1.35; }
+.doc-card p  { font-size: .8rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+.doc-meta { display: flex; align-items: center; gap: 10px; font-size: .73rem; color: var(--text-muted); flex-wrap: wrap; }
+.doc-meta i { margin-right: 3px; }
+.doc-actions { display: flex; gap: 8px; margin-top: 4px; }
+.doc-actions a { font-size: .78rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; display: flex; align-items: center; gap: 4px; }
+.cat-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); font-size: .8rem; font-weight: 600; cursor: pointer; transition: var(--transition); color: var(--text-muted); }
+.cat-pill.active, .cat-pill:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+.cat-pill .cnt { background: rgba(255,255,255,.15); border-radius: 10px; padding: 1px 6px; font-size: .68rem; }
+.search-hero { background: linear-gradient(135deg,var(--navy),var(--navy-light)); padding: 40px 0; }
+.search-hero h2 { color: #fff; font-size: 1.3rem; margin-bottom: 6px; }
+.search-hero p { color: rgba(255,255,255,.65); font-size: .88rem; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left"><span><i class="fa fa-location-dot"></i> New Delhi, India</span><span>|</span><span>Updated: April 2026</span></div>
+    <div class="topbar-right"><a href="mailto:info@neuratwin.in"><i class="fa fa-envelope"></i> info@neuratwin.in</a><div class="topbar-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">NT</div>
+        <div class="logo-text"><div class="name">NeuraTwin<span style="color:var(--teal)">.in</span></div><div class="tag">GIS · Digital Twin · Policy Intelligence</div></div>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html"><i class="fa fa-house"></i> Home</a></li>
+          <li class="nav-dropdown"><a href="#"><i class="fa fa-layer-group"></i> Modules <i class="fa fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+              <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+              <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+              <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+              <a href="case-studies.html"><i class="fa fa-star"></i> Case Study Repository</a>
+              <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+              <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+              <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+            </div>
+          </li>
+          <li><a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a></li>
+          <li><a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> Tenders</a></li>
+          <li><a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search"><i class="fa fa-magnifying-glass"></i><input type="text" placeholder="Search policies…"/></div>
+        <button class="btn-login"><i class="fa fa-user"></i> Login</button>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close"><i class="fa fa-xmark"></i></button>
+  <a href="index.html"><i class="fa fa-house"></i> Home</a>
+  <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+  <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+  <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+  <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+  <a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a>
+  <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+  <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+  <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb"><div class="container"><ol><li><a href="index.html"><i class="fa fa-house"></i> Home</a></li><li class="current">Policy & Regulatory Library</li></ol></div></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge"><i class="fa fa-scale-balanced"></i> Module 01 · Central Acts · State Rules · Circulars</div>
+    <h1>Policy &amp; Regulatory Library</h1>
+    <p>The most comprehensive repository of Indian legislation, rules, and circulars governing GIS, spatial data, digital infrastructure, and e-governance — curated and updated for policy practitioners.</p>
+    <div class="page-hero-meta">
+      <div class="hero-stat"><div class="num" data-count="240" data-suffix="+">240+</div><div class="lbl">Documents</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="18">18</div><div class="lbl">Central Acts</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="28">28</div><div class="lbl">States Covered</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="74">74</div><div class="lbl">Circulars & Guidelines</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Search Hero -->
+<div class="search-hero">
+  <div class="container">
+    <div class="search-bar" style="max-width:720px;">
+      <input type="text" placeholder="Search Acts, Rules, Circulars, Guidelines…" data-search-input="#doc-results" style="font-size:.95rem;"/>
+      <select>
+        <option>All Categories</option>
+        <option>Central Acts</option>
+        <option>Rules &amp; Regulations</option>
+        <option>Guidelines &amp; Policies</option>
+        <option>Circulars &amp; Notifications</option>
+        <option>State Policies</option>
+      </select>
+      <button><i class="fa fa-magnifying-glass"></i> Search</button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<section class="section-sm">
+  <div class="container">
+    <div class="page-layout" style="align-items:start;">
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header"><i class="fa fa-filter"></i> Browse by Category</div>
+        <nav class="sidebar-nav">
+          <a href="#central-acts" class="active"><i class="fa fa-landmark"></i> Central Acts (18)</a>
+          <a href="#rules"><i class="fa fa-scroll"></i> Rules & Regulations (32)</a>
+          <a href="#guidelines"><i class="fa fa-file-lines"></i> Guidelines & Policies (56)</a>
+          <a href="#circulars"><i class="fa fa-bell"></i> Circulars & Notifications (74)</a>
+          <a href="#state"><i class="fa fa-map"></i> State SDI Policies (60+)</a>
+          <a href="#draft"><i class="fa fa-pencil"></i> Draft / Open for Comment (8)</a>
+        </nav>
+        <div style="padding:16px;">
+          <div class="section-label" style="margin-bottom:10px;">Filter by Ministry</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span class="tag active">All</span>
+            <span class="tag">MeitY</span>
+            <span class="tag">MoHUA</span>
+            <span class="tag">DoLR</span>
+            <span class="tag">DST</span>
+            <span class="tag">MoRD</span>
+            <span class="tag">NRSC</span>
+          </div>
+        </div>
+        <div style="padding:0 16px 16px;">
+          <div class="section-label" style="margin-bottom:10px;">Filter by Year</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span class="tag">2024-26</span>
+            <span class="tag">2020-23</span>
+            <span class="tag">2015-19</span>
+            <span class="tag">Pre-2015</span>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,var(--navy),var(--teal));padding:16px;margin:0 16px 16px;border-radius:var(--radius);">
+          <div style="color:#fff;font-weight:700;font-size:.85rem;margin-bottom:6px;"><i class="fa fa-bell"></i> Policy Alerts</div>
+          <p style="font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:10px;">Get notified when new Acts or amendments are published.</p>
+          <button class="btn btn-sm" style="background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);width:100%;justify-content:center;"><i class="fa fa-envelope"></i> Subscribe to Alerts</button>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main id="doc-results">
+
+        <!-- Section: Central Acts -->
+        <div id="central-acts">
+          <div class="flex-between mb-24">
+            <div><h3 style="color:var(--navy);">Central Legislation</h3><p style="font-size:.83rem;">Primary Acts of Parliament governing digital infrastructure, data, and geospatial domain.</p></div>
+            <span class="badge badge-blue">18 Acts</span>
+          </div>
+          <div class="doc-grid mb-32">
+
+            <div class="doc-card" data-search-text="Information Technology Act 2000 IT Act cyber crime digital signature MeitY">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fa fa-scale-balanced"></i></div>
+                <span class="badge badge-blue">Central Act</span>
+              </div>
+              <h4>Information Technology Act, 2000</h4>
+              <p>Foundation of India's digital legal framework covering cybercrime, electronic records, digital signatures, and intermediary liability. Amended in 2008 with sections 66A-69.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> 2000 (Amended 2008)</span>
+                <span><i class="fa fa-building"></i> MeitY</span>
+                <span><i class="fa fa-file-pdf"></i> 122 pages</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fa fa-download"></i> PDF</a>
+                <a href="compliance-compass.html" class="btn btn-sm btn-outline" style="color:var(--teal);border-color:var(--teal);"><i class="fa fa-compass"></i> Compliance</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="DPDP Digital Personal Data Protection Act 2023 privacy data principal fiduciary">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fee2e2;color:#dc2626;"><i class="fa fa-shield-halved"></i></div>
+                <span class="badge badge-red">Critical · 2023</span>
+              </div>
+              <h4>Digital Personal Data Protection Act, 2023</h4>
+              <p>India's landmark data protection legislation defining rights of Data Principals, obligations of Fiduciaries, and penalties. Critical for all GIS/spatial platforms handling citizen data.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> August 2023</span>
+                <span><i class="fa fa-building"></i> MeitY</span>
+                <span><i class="fa fa-triangle-exclamation" style="color:var(--saffron);"></i> Rules Pending</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fa fa-download"></i> PDF</a>
+                <a href="compliance-compass.html" class="btn btn-sm" style="background:#fee2e2;color:#dc2626;"><i class="fa fa-compass"></i> Impact Guide</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="Geospatial Data Guidelines 2021 DST spatial liberalisation drone satellite foreign">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-earth-asia"></i></div>
+                <span class="badge badge-green">Liberalised · 2021</span>
+              </div>
+              <h4>Geospatial Data Guidelines, 2021</h4>
+              <p>DST's landmark liberalisation of geospatial data policy — removing prior restrictions on mapping, drone surveys, and foreign entity access to Indian spatial datasets.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> February 2021</span>
+                <span><i class="fa fa-building"></i> DST</span>
+                <span><i class="fa fa-file-pdf"></i> 28 pages</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fa fa-download"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="National Map Policy 2005 Survey of India SOI restricted classified open series">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-map"></i></div>
+                <span class="badge badge-navy">Foundational</span>
+              </div>
+              <h4>National Map Policy, 2005</h4>
+              <p>Governs production, maintenance, and dissemination of topographic maps by Survey of India. Defines Defence Series Maps vs Open Series Maps classification.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> May 2005</span>
+                <span><i class="fa fa-building"></i> Survey of India / DST</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fa fa-download"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="Right to Information Act RTI public record government transparency">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#cffafe;color:#0e7490;"><i class="fa fa-eye"></i></div>
+                <span class="badge badge-teal">Transparency</span>
+              </div>
+              <h4>Right to Information Act, 2005</h4>
+              <p>Establishes citizens' right to access government records including spatial data, GIS datasets, and project documents held by public authorities.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> 2005</span>
+                <span><i class="fa fa-building"></i> DoPT</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fa fa-download"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="Indian Telegraph Act wireless telegraphy spectrum frequency communication">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fed7aa;color:#c2410c;"><i class="fa fa-tower-broadcast"></i></div>
+                <span class="badge badge-orange">Telecommunications</span>
+              </div>
+              <h4>Telecommunications Act, 2023</h4>
+              <p>New legislation replacing the Indian Telegraph Act 1885. Governs spectrum, telecom infrastructure — relevant for IoT-enabled GIS and smart city sensor networks.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> December 2023</span>
+                <span><i class="fa fa-building"></i> DoT</span>
+                <span class="badge badge-new">New</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fa fa-download"></i> PDF</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Section: Rules & Guidelines -->
+        <div id="guidelines" class="mt-32">
+          <div class="flex-between mb-24">
+            <div><h3 style="color:var(--navy);">Guidelines &amp; National Policies</h3><p style="font-size:.83rem;">Operational frameworks, standards, and guidelines from key ministries.</p></div>
+            <span class="badge badge-teal">56 Documents</span>
+          </div>
+          <div class="doc-grid mb-32">
+
+            <div class="doc-card" data-search-text="NSDI National Spatial Data Infrastructure guidelines NRSC DST interoperability">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-sitemap"></i></div>
+                <span class="badge badge-green">NSDI</span>
+              </div>
+              <h4>NSDI Guidelines &amp; Framework, 2021</h4>
+              <p>Defines India's National Spatial Data Infrastructure architecture — interoperability standards, metadata standards, and data sharing protocols for all government GIS projects.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> 2021</span>
+                <span><i class="fa fa-building"></i> DST / NRSC</span>
+                <span><i class="fa fa-file-pdf"></i> 84 pages</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fa fa-download"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="DPDP Rules 2025 data protection consent purpose limitation retention security">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fee2e2;color:#dc2626;"><i class="fa fa-gavel"></i></div>
+                <span class="badge badge-red">Draft Rules 2025</span>
+              </div>
+              <h4>DPDP Rules, 2025 (Notified)</h4>
+              <p>Implementation rules under the DPDP Act 2023 defining consent mechanisms, data localisation requirements, Significant Data Fiduciary criteria, and DPBI framework.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> January 2025</span>
+                <span><i class="fa fa-building"></i> MeitY</span>
+                <span class="badge badge-new">Notified</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="compliance-compass.html" class="btn btn-sm" style="background:#fee2e2;color:#dc2626;"><i class="fa fa-compass"></i> Compliance Check</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="MeitY Cloud Policy GIGW government empanelled cloud CSP data sovereignty">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fa fa-cloud"></i></div>
+                <span class="badge badge-blue">Cloud / Infra</span>
+              </div>
+              <h4>MeitY Empanelled Cloud Policy</h4>
+              <p>Mandates use of MeitY-empanelled Cloud Service Providers for all sensitive government data. Critical for GIS platforms storing cadastral, citizen, and classified spatial datasets.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> 2023 (Updated)</span>
+                <span><i class="fa fa-building"></i> MeitY</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fa fa-download"></i> PDF</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="Smart Cities Mission GIS framework data urban analytics IoT sensor">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#cffafe;color:#0e7490;"><i class="fa fa-city"></i></div>
+                <span class="badge badge-teal">Smart Cities</span>
+              </div>
+              <h4>Smart Cities Mission GIS Framework</h4>
+              <p>MoHUA guidelines for GIS implementation in Smart Cities including integrated command centre, IoT integration, and city-level digital twin specifications.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> 2022</span>
+                <span><i class="fa fa-building"></i> MoHUA</span>
+                <span><i class="fa fa-file-pdf"></i> 56 pages</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="dt-guide.html" class="btn btn-sm btn-outline"><i class="fa fa-cube"></i> DT Guide</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="SVAMITVA scheme village property land rights rural drone mapping DoLR">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-house-chimney"></i></div>
+                <span class="badge badge-green">Land / Revenue</span>
+              </div>
+              <h4>SVAMITVA Scheme Guidelines</h4>
+              <p>Operational guidelines for PM-SVAMITVA scheme — drone-based mapping of inhabited land in rural areas, rights-of-record creation, and property card issuance framework.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> 2020 (Phase III: 2024)</span>
+                <span><i class="fa fa-building"></i> MoRD / DoLR / SOI</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="case-studies.html" class="btn btn-sm btn-outline"><i class="fa fa-star"></i> Case Study</a>
+              </div>
+            </div>
+
+            <div class="doc-card" data-search-text="DILRMP digital India land records modernisation programme cadastral revenue">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-map-location-dot"></i></div>
+                <span class="badge badge-purple">Land Records</span>
+              </div>
+              <h4>DILRMP Operational Guidelines</h4>
+              <p>Digital India Land Records Modernisation Programme — computerisation of land records, integration of registration, mutation, and court records with GIS spatial layer.</p>
+              <div class="doc-meta">
+                <span><i class="fa fa-calendar"></i> 2016 (Revised 2021)</span>
+                <span><i class="fa fa-building"></i> DoLR</span>
+              </div>
+              <div class="doc-actions">
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fa fa-download"></i> PDF</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- State SDI Policies Table -->
+        <div id="state" class="mt-32">
+          <div class="flex-between mb-24">
+            <div><h3 style="color:var(--navy);">State SDI Policies &amp; GIS Guidelines</h3><p style="font-size:.83rem;">State-level Spatial Data Infrastructure policies and GIS governance frameworks.</p></div>
+            <span class="badge badge-grey">28 States</span>
+          </div>
+          <div class="alert alert-info mb-24"><i class="fa fa-circle-info"></i><div>State SDI policies vary significantly. Some states like Maharashtra and Karnataka have advanced GIS policies; others are still developing their frameworks. Click any state to view its detailed policy documents.</div></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>State</th>
+                  <th>GIS Policy / Framework</th>
+                  <th>Year</th>
+                  <th>Nodal Agency</th>
+                  <th>Status</th>
+                  <th>Documents</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Uttar Pradesh</strong></td>
+                  <td>UP GIS Policy &amp; UPSDIP Framework</td>
+                  <td>2020</td>
+                  <td>UPSAAC / NIC</td>
+                  <td><span class="badge badge-green">Active</span></td>
+                  <td><a href="#" class="text-blue" style="font-size:.8rem;"><i class="fa fa-file-pdf"></i> 3 docs</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Maharashtra</strong></td>
+                  <td>MHGIS Policy 2019 + Spatial Data Policy</td>
+                  <td>2019</td>
+                  <td>MRSAC / NIC</td>
+                  <td><span class="badge badge-green">Active</span></td>
+                  <td><a href="#" class="text-blue" style="font-size:.8rem;"><i class="fa fa-file-pdf"></i> 5 docs</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Karnataka</strong></td>
+                  <td>KSDI Policy &amp; Bhoomi Integration Framework</td>
+                  <td>2018</td>
+                  <td>KSRSAC</td>
+                  <td><span class="badge badge-green">Active</span></td>
+                  <td><a href="#" class="text-blue" style="font-size:.8rem;"><i class="fa fa-file-pdf"></i> 4 docs</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Telangana</strong></td>
+                  <td>TSSDIP &amp; DHARANI Integration</td>
+                  <td>2021</td>
+                  <td>TSSPDCL / NIC</td>
+                  <td><span class="badge badge-green">Active</span></td>
+                  <td><a href="#" class="text-blue" style="font-size:.8rem;"><i class="fa fa-file-pdf"></i> 3 docs</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Gujarat</strong></td>
+                  <td>Gujarat GIS Policy &amp; Digital Land Records</td>
+                  <td>2019</td>
+                  <td>BISAG-N</td>
+                  <td><span class="badge badge-green">Active</span></td>
+                  <td><a href="#" class="text-blue" style="font-size:.8rem;"><i class="fa fa-file-pdf"></i> 4 docs</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Rajasthan</strong></td>
+                  <td>RSAC GIS Framework</td>
+                  <td>2020</td>
+                  <td>RSAC</td>
+                  <td><span class="badge badge-orange">Partial</span></td>
+                  <td><a href="#" class="text-blue" style="font-size:.8rem;"><i class="fa fa-file-pdf"></i> 2 docs</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Tamil Nadu</strong></td>
+                  <td>TNSDC GIS Policy &amp; CRISP Integration</td>
+                  <td>2021</td>
+                  <td>TNSDC</td>
+                  <td><span class="badge badge-green">Active</span></td>
+                  <td><a href="#" class="text-blue" style="font-size:.8rem;"><i class="fa fa-file-pdf"></i> 3 docs</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Odisha</strong></td>
+                  <td>ORSAC Geospatial Framework</td>
+                  <td>2022</td>
+                  <td>ORSAC</td>
+                  <td><span class="badge badge-green">Active</span></td>
+                  <td><a href="#" class="text-blue" style="font-size:.8rem;"><i class="fa fa-file-pdf"></i> 2 docs</a></td>
+                </tr>
+              </tbody>
+              <tfoot><tr><td colspan="6">Showing 8 of 28 states · <a href="#" style="color:var(--blue);font-weight:600;">Load All States →</a></td></tr></tfoot>
+            </table>
+          </div>
+        </div>
+
+        <!-- Alert: Draft policies open for comment -->
+        <div id="draft" class="mt-40">
+          <div class="alert alert-warn mb-24"><i class="fa fa-triangle-exclamation"></i><div><strong>Open for Comment:</strong> NSDI Draft Policy 2024 is open for public comment until May 31, 2025. NeuraTwin's analysis is available below. <a href="#" style="color:var(--saffron);font-weight:700;">Submit comments via DST portal →</a></div></div>
+          <div class="doc-grid">
+            <div class="doc-card" style="border-left:4px solid var(--saffron);">
+              <div class="doc-card-top"><div class="doc-icon" style="background:#fffbeb;color:#92400e;"><i class="fa fa-pencil"></i></div><span class="badge badge-orange">Draft — Open</span></div>
+              <h4>NSDI Draft Policy 2024</h4>
+              <p>Revised National Spatial Data Infrastructure policy proposing open data mandates for government-created spatial datasets, pricing reform, and private sector data aggregation guidelines.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> 2024</span><span><i class="fa fa-building"></i> DST</span><span><i class="fa fa-hourglass-half" style="color:var(--saffron);"></i> Comments open</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read Draft</a><a href="#" class="btn btn-sm btn-outline" style="color:var(--saffron);border-color:var(--saffron);"><i class="fa fa-comment"></i> NeuraTwin Analysis</a></div>
+            </div>
+            <div class="doc-card" style="border-left:4px solid var(--saffron);">
+              <div class="doc-card-top"><div class="doc-icon" style="background:#fffbeb;color:#92400e;"><i class="fa fa-pencil"></i></div><span class="badge badge-orange">Draft — Open</span></div>
+              <h4>National Map Policy (Revised Draft) 2024</h4>
+              <p>Survey of India's draft revision to NMP 2005 — proposes accuracy standards update, drone survey regulations, and liberalised civilian access to 1:10,000 scale maps.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> 2024</span><span><i class="fa fa-building"></i> SoI / DST</span><span><i class="fa fa-hourglass-half" style="color:var(--saffron);"></i> Comments open</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read Draft</a><a href="#" class="btn btn-sm btn-outline" style="color:var(--saffron);border-color:var(--saffron);"><i class="fa fa-comment"></i> NeuraTwin Analysis</a></div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap"><div class="logo-icon" style="width:40px;height:40px;background:linear-gradient(135deg,#2d5282,#0891b2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;">NT</div><div><div class="site-name">NeuraTwin.in</div><div class="tagline">GIS · Digital Twin · Policy Intelligence</div></div></div>
+      <p>India's definitive platform for GIS, Digital Twin, and e-governance policy intelligence.</p>
+      <div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div class="footer-col"><h5>Modules</h5><ul>
+      <li><a href="policy-library.html"><i class="fa fa-chevron-right"></i> Policy Library</a></li>
+      <li><a href="knowledge-base.html"><i class="fa fa-chevron-right"></i> Knowledge Base</a></li>
+      <li><a href="dt-guide.html"><i class="fa fa-chevron-right"></i> Digital Twin Guide</a></li>
+      <li><a href="rfp-intelligence.html"><i class="fa fa-chevron-right"></i> RFP Intelligence</a></li>
+      <li><a href="case-studies.html"><i class="fa fa-chevron-right"></i> Case Studies</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="#"><i class="fa fa-chevron-right"></i> About NeuraTwin</a></li>
+      <li><a href="compliance-compass.html"><i class="fa fa-chevron-right"></i> Compliance Compass</a></li>
+      <li><a href="tech-evaluator.html"><i class="fa fa-chevron-right"></i> Tech Evaluator</a></li>
+      <li><a href="policy-watch.html"><i class="fa fa-chevron-right"></i> Policy Watch</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Policy Alerts</h5><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:12px;">Get notified on new acts, amendments, and circulars.</p><div class="newsletter-form"><input type="email" placeholder="your@email.com"/><button>Subscribe</button></div></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p>© 2026 NeuraTwin.in · Not affiliated with any government body.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div></div></div>
+</footer>
+
+<button class="back-top"><i class="fa fa-arrow-up"></i></button>
+<script src="js/main.js"></script>
+</body>
+</html>

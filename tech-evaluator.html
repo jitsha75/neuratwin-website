@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tech Stack Evaluator — NeuraTwin.in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+.tech-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; border-bottom: 2px solid var(--border); }
+.tech-tab-btn { padding: 12px 16px; border: none; background: none; color: var(--text-muted); font-size: .9rem; font-weight: 600; cursor: pointer; transition: var(--transition); border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.tech-tab-btn:hover { color: var(--blue); }
+.tech-tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
+.tech-pane { display: none; }
+.tech-pane.active { display: block; }
+.compare-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: .85rem; }
+.compare-table th, .compare-table td { padding: 12px 8px; text-align: center; border: 1px solid var(--border); }
+.compare-table th { background: var(--navy); color: #fff; font-weight: 600; white-space: nowrap; }
+.compare-table th:first-child { text-align: left; }
+.compare-table td:first-child { text-align: left; font-weight: 600; background: var(--bg); }
+.compare-yes { color: var(--green); font-weight: 700; }
+.compare-no { color: var(--red); font-weight: 700; }
+.compare-partial { color: var(--saffron); font-weight: 700; }
+.rec-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 32px 0; }
+.rec-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.rec-card h5 { color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.rec-card .stack-list { margin: 16px 0; font-size: .85rem; }
+.rec-card .stack-list strong { color: var(--blue); }
+.rec-card p { font-size: .85rem; line-height: 1.6; }
+.tco-form { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; max-width: 600px; }
+.form-group { margin-bottom: 24px; }
+.form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--navy); font-size: .9rem; }
+.form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: .9rem; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+.form-radio { display: flex; gap: 24px; margin-top: 8px; }
+.form-radio label { margin-bottom: 0; font-weight: 400; display: flex; align-items: center; gap: 8px; }
+.form-radio input { width: auto; }
+.tco-results { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-top: 24px; display: none; }
+.tco-results.active { display: block; }
+.tco-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-lt); font-size: .9rem; }
+.tco-row strong { color: var(--navy); }
+.tco-row.total { background: var(--navy); color: #fff; padding: 12px 8px; border-radius: 4px; margin-top: 8px; font-weight: 700; border-bottom: none; }
+.mii-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: .85rem; }
+.mii-table th, .mii-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+.mii-table th { background: var(--navy); color: #fff; font-weight: 600; }
+.mii-table tr:hover { background: var(--bg); }
+.mii-score { font-weight: 700; }
+.mii-yes { color: var(--green); }
+.mii-partial { color: var(--saffron); }
+.scenario-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 24px 0; }
+.scenario-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.scenario-card h5 { color: var(--navy); margin-bottom: 12px; }
+.scenario-card .scenario-stack { background: var(--bg); padding: 12px; border-radius: 6px; margin: 12px 0; font-size: .85rem; }
+.scenario-card .scenario-rationale { font-size: .8rem; color: var(--text-muted); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left"><span><i class="fa fa-location-dot"></i> New Delhi, India</span><span>|</span><span>Updated: April 2026</span></div>
+    <div class="topbar-right"><a href="mailto:info@neuratwin.in"><i class="fa fa-envelope"></i> info@neuratwin.in</a><div class="topbar-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">NT</div>
+        <div class="logo-text"><div class="name">NeuraTwin<span style="color:var(--teal)">.in</span></div><div class="tag">GIS · Digital Twin · Policy Intelligence</div></div>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html"><i class="fa fa-house"></i> Home</a></li>
+          <li class="nav-dropdown"><a href="#"><i class="fa fa-layer-group"></i> Modules <i class="fa fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+              <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+              <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+              <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+              <a href="case-studies.html"><i class="fa fa-star"></i> Case Study Repository</a>
+              <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+              <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+              <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+            </div>
+          </li>
+          <li><a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a></li>
+          <li><a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> Tenders</a></li>
+          <li><a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search"><i class="fa fa-magnifying-glass"></i><input type="text" placeholder="Search tools…"/></div>
+        <button class="btn-login"><i class="fa fa-user"></i> Login</button>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close"><i class="fa fa-xmark"></i></button>
+  <a href="index.html"><i class="fa fa-house"></i> Home</a>
+  <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+  <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+  <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+  <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+  <a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a>
+  <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+  <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+  <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb"><div class="container"><ol><li><a href="index.html"><i class="fa fa-house"></i> Home</a></li><li class="current">Tech Stack Evaluator</li></ol></div></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge"><i class="fa fa-microchip"></i> Module 07 · Open Source · Proprietary · MII · TCO</div>
+    <h1>Tech Stack Evaluator</h1>
+    <p>Comprehensive comparison of 24 GIS platforms, cloud solutions, and tech stacks for Indian government projects. Evaluate across cost, MII compliance, feature richness, and long-term total cost of ownership (TCO).</p>
+    <div class="page-hero-meta">
+      <div class="hero-stat"><div class="num" data-count="24">24</div><div class="lbl">Tools Evaluated</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="6">6</div><div class="lbl">Categories</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num">₹8L–</div><div class="lbl">TCO Range</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="8">8</div><div class="lbl">MII-Compliant</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<section class="section-sm">
+  <div class="container">
+    <!-- Tabs -->
+    <div class="tech-tabs">
+      <button class="tech-tab-btn active" data-tab="comparison"><i class="fa fa-columns"></i> Platform Comparison</button>
+      <button class="tech-tab-btn" data-tab="tco"><i class="fa fa-calculator"></i> TCO Calculator</button>
+      <button class="tech-tab-btn" data-tab="mii"><i class="fa fa-shield"></i> MII Compliance</button>
+      <button class="tech-tab-btn" data-tab="recommendations"><i class="fa fa-star"></i> Recommendations</button>
+    </div>
+
+    <!-- Comparison Tab -->
+    <div id="comparison" class="tech-pane active">
+      <h3 style="color: var(--navy); margin-bottom: 16px;">GIS Platform Feature Comparison</h3>
+      <div style="overflow-x: auto;">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature / Platform</th>
+              <th>QGIS</th>
+              <th>ArcGIS</th>
+              <th>MapInfo</th>
+              <th>OpenLayers</th>
+              <th>ESRI Online</th>
+              <th>Bhuvan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cost Model</td>
+              <td><span class="compare-yes">Free (OSS)</span></td>
+              <td><span class="compare-no">Proprietary ₹50-300L/yr</span></td>
+              <td><span class="compare-no">₹100-200L/yr</span></td>
+              <td><span class="compare-yes">Free (OSS)</span></td>
+              <td><span class="compare-no">₹5-50L/yr</span></td>
+              <td><span class="compare-yes">Free (Govt)</span></td>
+            </tr>
+            <tr>
+              <td>MII Compliance</td>
+              <td><span class="compare-yes">Yes (via partners)</span></td>
+              <td><span class="compare-partial">ESRI India partner</span></td>
+              <td><span class="compare-no">No</span></td>
+              <td><span class="compare-yes">Yes</span></td>
+              <td><span class="compare-partial">ESRI India hosted</span></td>
+              <td><span class="compare-yes">Yes (100%)</span></td>
+            </tr>
+            <tr>
+              <td>Cloud Deployment</td>
+              <td><span class="compare-yes">AWS/Azure/On-prem</span></td>
+              <td><span class="compare-yes">ArcGIS Online (global)</span></td>
+              <td><span class="compare-partial">Limited cloud</span></td>
+              <td><span class="compare-yes">Any cloud provider</span></td>
+              <td><span class="compare-yes">ESRI cloud (limited)</span></td>
+              <td><span class="compare-yes">AWS India</span></td>
+            </tr>
+            <tr>
+              <td>Web GIS Support</td>
+              <td><span class="compare-yes">Excellent (QGIS Server)</span></td>
+              <td><span class="compare-yes">Excellent</span></td>
+              <td><span class="compare-yes">Good</span></td>
+              <td><span class="compare-yes">Excellent (native)</span></td>
+              <td><span class="compare-yes">Excellent</span></td>
+              <td><span class="compare-yes">Very Good</span></td>
+            </tr>
+            <tr>
+              <td>3D Capability</td>
+              <td><span class="compare-partial">Limited (qgis2threejs)</span></td>
+              <td><span class="compare-yes">Advanced</span></td>
+              <td><span class="compare-yes">Good</span></td>
+              <td><span class="compare-yes">Good (Cesium)</span></td>
+              <td><span class="compare-yes">Excellent</span></td>
+              <td><span class="compare-yes">Good</span></td>
+            </tr>
+            <tr>
+              <td>Offline Support</td>
+              <td><span class="compare-yes">Yes</span></td>
+              <td><span class="compare-partial">Limited</span></td>
+              <td><span class="compare-yes">Yes</span></td>
+              <td><span class="compare-partial">via plugins</span></td>
+              <td><span class="compare-no">No</span></td>
+              <td><span class="compare-yes">Yes</span></td>
+            </tr>
+            <tr>
+              <td>Indian Language Support</td>
+              <td><span class="compare-yes">Hindi, Tamil, Telugu</span></td>
+              <td><span class="compare-yes">Hindi</span></td>
+              <td><span class="compare-no">Limited</span></td>
+              <td><span class="compare-partial">Custom via i18n</span></td>
+              <td><span class="compare-yes">Hindi</span></td>
+              <td><span class="compare-yes">Excellent</span></td>
+            </tr>
+            <tr>
+              <td>NSDI Compatibility</td>
+              <td><span class="compare-yes">Excellent</span></td>
+              <td><span class="compare-yes">Excellent</span></td>
+              <td><span class="compare-yes">Good</span></td>
+              <td><span class="compare-yes">Excellent</span></td>
+              <td><span class="compare-yes">Excellent</span></td>
+              <td><span class="compare-yes">Excellent</span></td>
+            </tr>
+            <tr>
+              <td>Vendor Support in India</td>
+              <td><span class="compare-yes">Yes (NRSC, BISAG-N)</span></td>
+              <td><span class="compare-yes">ESRI India</span></td>
+              <td><span class="compare-partial">Via integrators</span></td>
+              <td><span class="compare-yes">Multiple vendors</span></td>
+              <td><span class="compare-yes">ESRI India</span></td>
+              <td><span class="compare-yes">NRSC direct</span></td>
+            </tr>
+            <tr>
+              <td>Open API</td>
+              <td><span class="compare-yes">Full (REST)</span></td>
+              <td><span class="compare-yes">Extensive</span></td>
+              <td><span class="compare-yes">Good</span></td>
+              <td><span class="compare-yes">Full</span></td>
+              <td><span class="compare-yes">Full</span></td>
+              <td><span class="compare-yes">Good (REST)</span></td>
+            </tr>
+            <tr>
+              <td>Spatial Database Support</td>
+              <td><span class="compare-yes">PostGIS, Oracle, SQL Server</span></td>
+              <td><span class="compare-yes">SDE, PostGIS, Oracle</span></td>
+              <td><span class="compare-yes">SQL Server, PostgreSQL</span></td>
+              <td><span class="compare-yes">PostGIS, MongoDB</span></td>
+              <td><span class="compare-yes">SDE</span></td>
+              <td><span class="compare-yes">PostGIS</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="color: var(--navy); margin: 32px 0 16px;">Quick Recommendations by Use Case</h3>
+      <div class="rec-cards">
+        <div class="rec-card">
+          <h5><i class="fa fa-building"></i> For Govt RFP <₹2 Cr</h5>
+          <p><strong>Recommended:</strong> QGIS (open-source) + PostGIS + QGIS Server</p>
+          <p style="margin-top: 8px; font-size: .8rem; color: var(--text-muted);"><strong>Rationale:</strong> Zero licensing cost frees budget for implementation, training. NRSC and BISAG-N provide local support. Avoids vendor lock-in. Ideal for smaller ULBs, state departments.</p>
+        </div>
+        <div class="rec-card">
+          <h5><i class="fa fa-city"></i> For Smart City/DT >₹20 Cr</h5>
+          <p><strong>Recommended:</strong> ArcGIS (ESRI India) or integrated stack: QGIS + OpenLayers + custom APIs</p>
+          <p style="margin-top: 8px; font-size: .8rem; color: var(--text-muted);"><strong>Rationale:</strong> ArcGIS premium support, 3D, advanced analytics justify cost. OpenLayers hybrid approach balances cost and features. Both support cloud deployment, multi-modal integration.</p>
+        </div>
+        <div class="rec-card">
+          <h5><i class="fa fa-scroll"></i> For Revenue & Cadastral</h5>
+          <p><strong>Recommended:</strong> Bhuvan (NRSC) or QGIS + custom revenue modules</p>
+          <p style="margin-top: 8px; font-size: .8rem; color: var(--text-muted);"><strong>Rationale:</strong> Bhuvan built for Indian land data, DoLR integration native. Or QGIS + state-specific plugins (e.g., UP's UPSAAC). Avoids foreign vendor lock-in for sensitive data.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TCO Calculator Tab -->
+    <div id="tco" class="tech-pane">
+      <h3 style="color: var(--navy); margin-bottom: 24px;">Total Cost of Ownership Calculator (3-Year)</h3>
+      <form class="tco-form" id="tco-form">
+        <div class="form-group">
+          <label for="tco-users"><i class="fa fa-users"></i> Number of GIS Users (Concurrent)</label>
+          <input type="number" id="tco-users" name="users" min="5" max="500" value="50" />
+          <small style="color: var(--text-muted);">Include desktop + web users</small>
+        </div>
+
+        <div class="form-group">
+          <label for="tco-years"><i class="fa fa-calendar"></i> Project Duration (Years)</label>
+          <input type="number" id="tco-years" name="years" min="1" max="10" value="3" />
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Stack</label>
+          <div class="form-radio">
+            <label>
+              <input type="radio" name="stack" value="open-source" checked /> Open Source (QGIS + PostGIS)
+            </label>
+            <label>
+              <input type="radio" name="stack" value="proprietary" /> Proprietary (ArcGIS)
+            </label>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="calcTCO()"><i class="fa fa-calculator"></i> Calculate TCO</button>
+      </form>
+
+      <div class="tco-results" id="tco-results">
+        <h4 style="color: var(--navy); margin-bottom: 16px;">3-Year Total Cost Breakdown</h4>
+        <div class="tco-row">
+          <span>License Cost (Year 1-3)</span>
+          <strong id="tco-license">—</strong>
+        </div>
+        <div class="tco-row">
+          <span>Implementation & Integration</span>
+          <strong id="tco-impl">—</strong>
+        </div>
+        <div class="tco-row">
+          <span>User Training (3 batches)</span>
+          <strong id="tco-training">—</strong>
+        </div>
+        <div class="tco-row">
+          <span>Annual Support & Maintenance</span>
+          <strong id="tco-support">—</strong>
+        </div>
+        <div class="tco-row">
+          <span>Infrastructure (cloud/on-prem)</span>
+          <strong id="tco-infra">—</strong>
+        </div>
+        <div class="tco-row total">
+          <span>TOTAL 3-YEAR TCO</span>
+          <strong id="tco-total">—</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- MII Compliance Tab -->
+    <div id="mii" class="tech-pane">
+      <h3 style="color: var(--navy); margin-bottom: 16px;">Make in India (MII) Compliance Scorecard</h3>
+      <p style="margin-bottom: 24px; font-size: .9rem;">Make in India certification for GIS software requires Indian origin, Indian employment, and local manufacturing/support. DPIIT maintains MII registry.</p>
+
+      <table class="mii-table">
+        <thead>
+          <tr>
+            <th>Tool / Platform</th>
+            <th>Indian Origin</th>
+            <th>Indian Partner Available</th>
+            <th>DPIIT Registered</th>
+            <th>MII Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Bhuvan (NRSC)</strong></td>
+            <td><span class="mii-yes">✓ YES</span></td>
+            <td><span class="mii-yes">✓ NRSC direct</span></td>
+            <td><span class="mii-yes">✓ YES</span></td>
+            <td><span class="mii-score" style="color: var(--green);">★★★★★ 100%</span></td>
+          </tr>
+          <tr>
+            <td><strong>QGIS (via NRSC/BISAG-N)</strong></td>
+            <td><span class="mii-partial">~ German origin but Indian partners</span></td>
+            <td><span class="mii-yes">✓ NRSC, BISAG-N, state agencies</span></td>
+            <td><span class="mii-partial">~ Via Indian partners</span></td>
+            <td><span class="mii-score" style="color: var(--saffron);">★★★★☆ 80%</span></td>
+          </tr>
+          <tr>
+            <td><strong>ArcGIS (ESRI India)</strong></td>
+            <td><span class="mii-partial">~ US-origin, India subsidiary</span></td>
+            <td><span class="mii-yes">✓ ESRI India Ltd</span></td>
+            <td><span class="mii-partial">~ Partial compliance</span></td>
+            <td><span class="mii-score" style="color: var(--saffron);">★★★☆☆ 60%</span></td>
+          </tr>
+          <tr>
+            <td><strong>MapmyIndia APIS</strong></td>
+            <td><span class="mii-yes">✓ YES (Indian mapping co)</span></td>
+            <td><span class="mii-yes">✓ Direct</span></td>
+            <td><span class="mii-yes">✓ YES</span></td>
+            <td><span class="mii-score" style="color: var(--green);">★★★★★ 95%</span></td>
+          </tr>
+          <tr>
+            <td><strong>OpenLayers (via Indian vendors)</strong></td>
+            <td><span class="mii-partial">~ International OSS, India support</span></td>
+            <td><span class="mii-yes">✓ Multiple vendors</span></td>
+            <td><span class="mii-partial">~ Via vendors</span></td>
+            <td><span class="mii-score" style="color: var(--saffron);">★★★★☆ 75%</span></td>
+          </tr>
+          <tr>
+            <td><strong>Vedas (NRSC)</strong></td>
+            <td><span class="mii-yes">✓ YES</span></td>
+            <td><span class="mii-yes">✓ NRSC direct</span></td>
+            <td><span class="mii-yes">✓ YES</span></td>
+            <td><span class="mii-score" style="color: var(--green);">★★★★★ 100%</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Recommendations Tab -->
+    <div id="recommendations" class="tech-pane">
+      <h3 style="color: var(--navy); margin-bottom: 24px;">Scenario-based Tech Stack Recommendations</h3>
+
+      <div class="scenario-cards">
+        <div class="scenario-card">
+          <h5><i class="fa fa-landmark"></i> Government RFP <₹5 Cr</h5>
+          <div class="scenario-stack">
+            <strong>Stack:</strong> QGIS Desktop + QGIS Server + PostGIS + Ubuntu<br/>
+            <strong>Cloud:</strong> AWS/Azure India (or on-premise)<br/>
+            <strong>Licensing:</strong> Open source (zero license cost)
+          </div>
+          <div class="scenario-rationale">
+            <strong>Why:</strong> Minimal licensing overhead maximizes implementation budget. Local support available from NRSC, BISAG-N, state IT depts. Avoids vendor lock-in. Suitable for ULBs, village-level projects, state GIS centers. Maintenance easy — large support community.
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <h5><i class="fa fa-city"></i> Smart City / Digital Twin >₹20 Cr</h5>
+          <div class="scenario-stack">
+            <strong>Stack:</strong> ArcGIS Portal + ArcGIS Online + Spatial Database Engine<br/>
+            <strong>Cloud:</strong> AWS/Azure (ESRI India support)<br/>
+            <strong>Licensing:</strong> ₹100-300L/year (site license model)
+          </div>
+          <div class="scenario-rationale">
+            <strong>Why:</strong> Enterprise-grade features (3D, analytics, automation, mobile), proven scalability for large cities, dedicated support from ESRI India, integration with Smart City platforms (ICC, sensor networks). Higher cost justified by faster deployment, reduced implementation risk.
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <h5><i class="fa fa-scroll"></i> Research / Academic</h5>
+          <div class="scenario-stack">
+            <strong>Stack:</strong> QGIS + PostGIS + GRASS GIS + R/Python<br/>
+            <strong>Cloud:</strong> Academic cloud (GitHub, AWS Academic)<br/>
+            <strong>Licensing:</strong> All open source
+          </div>
+          <div class="scenario-rationale">
+            <strong>Why:</strong> Zero cost ideal for academic budgets. Advanced spatial analysis via GRASS, QGIS plugins, R packages (sf, raster). Reproducibility through open-source. Good for training students in GIS methodology without vendor constraints.
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <h5><i class="fa fa-fire"></i> Emergency / Rapid Deployment</h5>
+          <div class="scenario-stack">
+            <strong>Stack:</strong> Google Maps + QGIS + cloud-hosted PostGIS<br/>
+            <strong>Cloud:</strong> Google Cloud or AWS (pre-configured)<br/>
+            <strong>Licensing:</strong> Maps API pay-as-you-go + cloud infra
+          </div>
+          <div class="scenario-rationale">
+            <strong>Why:</strong> Google Maps infrastructure handles scale instantly. QGIS for desktop editing, PostGIS backend. Can be operational within days, not months. Suitable for disaster response, rapid needs assessment, temporary emergency operations.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap"><div class="logo-icon" style="width:40px;height:40px;background:linear-gradient(135deg,#2d5282,#0891b2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;">NT</div><div><div class="site-name">NeuraTwin.in</div><div class="tagline">GIS · Digital Twin · Policy Intelligence</div></div></div>
+      <p>India's definitive platform for GIS, Digital Twin, and e-governance policy intelligence.</p>
+      <div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div class="footer-col"><h5>Modules</h5><ul>
+      <li><a href="policy-library.html"><i class="fa fa-chevron-right"></i> Policy Library</a></li>
+      <li><a href="knowledge-base.html"><i class="fa fa-chevron-right"></i> Knowledge Base</a></li>
+      <li><a href="dt-guide.html"><i class="fa fa-chevron-right"></i> Digital Twin Guide</a></li>
+      <li><a href="rfp-intelligence.html"><i class="fa fa-chevron-right"></i> RFP Intelligence</a></li>
+      <li><a href="case-studies.html"><i class="fa fa-chevron-right"></i> Case Studies</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="#"><i class="fa fa-chevron-right"></i> About NeuraTwin</a></li>
+      <li><a href="compliance-compass.html"><i class="fa fa-chevron-right"></i> Compliance Compass</a></li>
+      <li><a href="tech-evaluator.html"><i class="fa fa-chevron-right"></i> Tech Evaluator</a></li>
+      <li><a href="policy-watch.html"><i class="fa fa-chevron-right"></i> Policy Watch</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Policy Alerts</h5><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:12px;">Get notified on new acts, amendments, and circulars.</p><div class="newsletter-form"><input type="email" placeholder="your@email.com"/><button>Subscribe</button></div></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p>© 2026 NeuraTwin.in · Not affiliated with any government body.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div></div></div>
+</footer>
+
+<button class="back-top"><i class="fa fa-arrow-up"></i></button>
+<script src="js/main.js"></script>
+<script>
+document.querySelectorAll('.tech-tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tech-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tech-pane').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById(this.dataset.tab).classList.add('active');
+  });
+});
+
+function calcTCO() {
+  const users = parseInt(document.getElementById('tco-users').value) || 50;
+  const years = parseInt(document.getElementById('tco-years').value) || 3;
+  const stack = document.querySelector('input[name="stack"]:checked').value;
+
+  let license, impl, training, support, infra;
+
+  if (stack === 'open-source') {
+    license = 0;
+    impl = users * 2000;
+    training = users * 500;
+    support = users * 5000;
+    infra = 500000;
+  } else {
+    license = users * 100000 * years;
+    impl = users * 3000;
+    training = users * 1000;
+    support = users * 15000;
+    infra = 1000000;
+  }
+
+  const total = license + impl + training + (support * years) + infra;
+
+  document.getElementById('tco-license').textContent = '₹' + license.toLocaleString('en-IN');
+  document.getElementById('tco-impl').textContent = '₹' + impl.toLocaleString('en-IN');
+  document.getElementById('tco-training').textContent = '₹' + training.toLocaleString('en-IN');
+  document.getElementById('tco-support').textContent = '₹' + (support * years).toLocaleString('en-IN');
+  document.getElementById('tco-infra').textContent = '₹' + infra.toLocaleString('en-IN');
+  document.getElementById('tco-total').textContent = '₹' + total.toLocaleString('en-IN');
+
+  document.getElementById('tco-results').classList.add('active');
+}
+
+document.querySelectorAll('#tco-form input').forEach(input => {
+  input.addEventListener('change', () => {
+    document.getElementById('tco-results').classList.remove('active');
+  });
+});
+</script>
+</body>
+</html>

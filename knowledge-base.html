@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Domain Knowledge Base — NeuraTwin.in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+.doc-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr)); gap: 20px; }
+.doc-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; transition: var(--transition); display: flex; flex-direction: column; gap: 10px; }
+.doc-card:hover { box-shadow: var(--shadow); border-color: var(--blue-light); transform: translateY(-2px); }
+.doc-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.doc-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.doc-card h4 { font-size: .92rem; color: var(--text); line-height: 1.35; }
+.doc-card p { font-size: .8rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+.doc-meta { display: flex; align-items: center; gap: 10px; font-size: .73rem; color: var(--text-muted); flex-wrap: wrap; }
+.doc-meta i { margin-right: 3px; }
+.doc-actions { display: flex; gap: 8px; margin-top: 4px; }
+.doc-actions a { font-size: .78rem; font-weight: 600; padding: 5px 12px; border-radius: 6px; display: flex; align-items: center; gap: 4px; }
+.tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; border-bottom: 2px solid var(--border); }
+.tab-btn { padding: 12px 16px; border: none; background: none; color: var(--text-muted); font-size: .9rem; font-weight: 600; cursor: pointer; transition: var(--transition); border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.tab-btn:hover { color: var(--blue); }
+.tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+.sidebar-right { width: 300px; }
+.sidebar-widget { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+.sidebar-widget h5 { color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-cloud .tag { background: var(--bg); padding: 6px 10px; border-radius: 6px; font-size: .78rem; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+.tag-cloud .tag:hover { background: var(--navy); color: #fff; }
+.recent-list { list-style: none; }
+.recent-list li { padding: 8px 0; border-bottom: 1px solid var(--border-lt); }
+.recent-list li:last-child { border-bottom: none; }
+.recent-list a { font-size: .85rem; color: var(--blue); display: block; margin-bottom: 3px; }
+.recent-list .date { font-size: .7rem; color: var(--text-light); }
+.cta-card { background: linear-gradient(135deg,var(--teal),var(--teal-light)); color: #fff; padding: 20px; border-radius: var(--radius); text-align: center; }
+.cta-card h5 { color: #fff; margin-bottom: 8px; }
+.cta-card p { color: rgba(255,255,255,.8); font-size: .8rem; margin-bottom: 12px; }
+.cta-card button { background: rgba(255,255,255,.25); color: #fff; border: 1px solid rgba(255,255,255,.4); padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: .85rem; }
+.cta-card button:hover { background: rgba(255,255,255,.35); }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left"><span><i class="fa fa-location-dot"></i> New Delhi, India</span><span>|</span><span>Updated: April 2026</span></div>
+    <div class="topbar-right"><a href="mailto:info@neuratwin.in"><i class="fa fa-envelope"></i> info@neuratwin.in</a><div class="topbar-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">NT</div>
+        <div class="logo-text"><div class="name">NeuraTwin<span style="color:var(--teal)">.in</span></div><div class="tag">GIS · Digital Twin · Policy Intelligence</div></div>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html"><i class="fa fa-house"></i> Home</a></li>
+          <li class="nav-dropdown"><a href="#"><i class="fa fa-layer-group"></i> Modules <i class="fa fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+              <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+              <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+              <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+              <a href="case-studies.html"><i class="fa fa-star"></i> Case Study Repository</a>
+              <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+              <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+              <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+            </div>
+          </li>
+          <li><a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a></li>
+          <li><a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> Tenders</a></li>
+          <li><a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search"><i class="fa fa-magnifying-glass"></i><input type="text" placeholder="Search knowledge base…"/></div>
+        <button class="btn-login"><i class="fa fa-user"></i> Login</button>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close"><i class="fa fa-xmark"></i></button>
+  <a href="index.html"><i class="fa fa-house"></i> Home</a>
+  <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+  <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+  <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+  <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+  <a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a>
+  <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+  <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+  <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb"><div class="container"><ol><li><a href="index.html"><i class="fa fa-house"></i> Home</a></li><li class="current">Domain Knowledge Base</li></ol></div></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge"><i class="fa fa-book-open"></i> Module 02 · 9 GIS Sectors · Domain Expertise</div>
+    <h1>Domain Knowledge Base</h1>
+    <p>Comprehensive sectoral knowledge library covering all 9 GIS implementation domains — from Urban Local Bodies to Development Authorities. Practical guidance, best practices, and domain-specific case examples.</p>
+    <div class="page-hero-meta">
+      <div class="hero-stat"><div class="num" data-count="9">9</div><div class="lbl">Sectors</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="180" data-suffix="+">180+</div><div class="lbl">Articles</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="42">42</div><div class="lbl">Contributors</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num">Weekly</div><div class="lbl">Updates</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<section class="section-sm">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 300px; gap: 32px; align-items: start;">
+      <main>
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="sector-1"><i class="fa fa-city"></i> Urban Local Bodies</button>
+          <button class="tab-btn" data-tab="sector-2"><i class="fa fa-scroll"></i> Revenue Records</button>
+          <button class="tab-btn" data-tab="sector-3"><i class="fa fa-droplet"></i> Water & Irrigation</button>
+          <button class="tab-btn" data-tab="sector-4"><i class="fa fa-bolt"></i> Power & T&D</button>
+          <button class="tab-btn" data-tab="sector-5"><i class="fa fa-road"></i> Roads & NHAI</button>
+          <button class="tab-btn" data-tab="sector-6"><i class="fa fa-tree"></i> Forest & Env</button>
+          <button class="tab-btn" data-tab="sector-7"><i class="fa fa-home"></i> Panchayat Dev</button>
+          <button class="tab-btn" data-tab="sector-8"><i class="fa fa-bridge"></i> NHAI Infra</button>
+          <button class="tab-btn" data-tab="sector-9"><i class="fa fa-layer-group"></i> Dev Authorities</button>
+        </div>
+
+        <!-- Sector 1: Urban Local Bodies -->
+        <div id="sector-1" class="tab-pane active">
+          <div class="doc-grid">
+            <div class="doc-card" data-search-text="Property Tax GIS Mapping">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fa fa-house-circle-check"></i></div>
+                <span class="badge badge-blue">ULB</span>
+              </div>
+              <h4>Property Tax GIS Integration</h4>
+              <p>Complete methodology for mapping property boundaries to revenue records, integrating municipal tax assessments with GIS parcel data, and automating tax base estimation.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> March 2025</span><span><i class="fa fa-user"></i> Vikas Sharma</span><span><i class="fa fa-clock"></i> 12 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card" data-search-text="RERA Compliance Mapping">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fee2e2;color:#dc2626;"><i class="fa fa-gavel"></i></div>
+                <span class="badge badge-red">Compliance</span>
+              </div>
+              <h4>RERA Compliance Mapping in Smart Cities</h4>
+              <p>GIS tools for tracking RERA-registered projects, validating spatial compliance, monitoring construction boundaries, and automated alert systems for boundary violations.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> February 2025</span><span><i class="fa fa-user"></i> Priya Desai</span><span><i class="fa fa-clock"></i> 15 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card" data-search-text="Utility Mapping">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-water"></i></div>
+                <span class="badge badge-green">ULB</span>
+              </div>
+              <h4>Utility Mapping Standards for ULBs</h4>
+              <p>Standardized approach for mapping water supply, sewerage, stormwater, and electric networks within ULB boundaries. Includes LoD specifications, attribute standards, and O&M layer design.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> January 2025</span><span><i class="fa fa-user"></i> Rajesh Kumar</span><span><i class="fa fa-clock"></i> 18 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card" data-search-text="Ward-Level Service Planning">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-chart-line"></i></div>
+                <span class="badge badge-purple">Analytics</span>
+              </div>
+              <h4>Ward-Level Service Planning with GIS</h4>
+              <p>Using GIS spatial analysis to optimize ward-level service delivery — waste collection routes, street lighting, drainage maintenance zones, and citizen grievance mapping by ward.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> December 2024</span><span><i class="fa fa-user"></i> Anita Singh</span><span><i class="fa fa-clock"></i> 14 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sector 2: Revenue Records -->
+        <div id="sector-2" class="tab-pane">
+          <div class="doc-grid">
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-scroll"></i></div>
+                <span class="badge badge-green">Revenue</span>
+              </div>
+              <h4>Cadastral Map Digitisation Standards</h4>
+              <p>Complete framework for converting legacy hand-drawn revenue maps into GIS-compatible digital format. Includes ground truthing methodology, accuracy assessment, and conflict resolution.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> March 2025</span><span><i class="fa fa-user"></i> Suresh Patel</span><span><i class="fa fa-clock"></i> 20 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#cffafe;color:#0e7490;"><i class="fa fa-database"></i></div>
+                <span class="badge badge-teal">Data Integration</span>
+              </div>
+              <h4>Linking RoR with Land Use Classification</h4>
+              <p>Methodology for integrating Rights-of-Record data with satellite-derived land use classification, identifying discrepancies, and maintaining spatial consistency across revenue and land use layers.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> February 2025</span><span><i class="fa fa-user"></i> Meera Nair</span><span><i class="fa fa-clock"></i> 16 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-person-hiking"></i></div>
+                <span class="badge badge-purple">Field Ops</span>
+              </div>
+              <h4>Ground Truthing for Village Survey Numbers</h4>
+              <p>Practical field methodology for validating GIS-digitised village survey numbers, boundary demarcation, and RoR verification using handheld GPS, drone surveys, and local stakeholder consultation.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> January 2025</span><span><i class="fa fa-user"></i> Amit Gupta</span><span><i class="fa fa-clock"></i> 22 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fed7aa;color:#c2410c;"><i class="fa fa-coins"></i></div>
+                <span class="badge badge-orange">Revenue</span>
+              </div>
+              <h4>Mutation Processing with GIS Validation</h4>
+              <p>Digital mutation workflow integrating GIS verification — validating mutation boundaries against satellite imagery, detecting illegal subdivisions, and automating compliance checks before recording.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> December 2024</span><span><i class="fa fa-user"></i> Deepak Sharma</span><span><i class="fa fa-clock"></i> 19 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sector 3: Water & Irrigation -->
+        <div id="sector-3" class="tab-pane">
+          <div class="doc-grid">
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#cffafe;color:#0e7490;"><i class="fa fa-droplet"></i></div>
+                <span class="badge badge-teal">Water</span>
+              </div>
+              <h4>Irrigation Command Area Delineation</h4>
+              <p>GIS-based methodology for accurate delineation of irrigation command areas, water user associations, and canal command boundaries using DEM analysis and spatial hydrological modeling.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> March 2025</span><span><i class="fa fa-user"></i> Dr. Ravi Shankar</span><span><i class="fa fa-clock"></i> 24 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-leaf"></i></div>
+                <span class="badge badge-green">Water</span>
+              </div>
+              <h4>Watershed Management Planning with GIS</h4>
+              <p>Comprehensive GIS framework for watershed characterisation, hydrological modeling, water availability assessment, and prioritisation of watershed treatment areas for PMKSY and related schemes.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> February 2025</span><span><i class="fa fa-user"></i> Priya Mehta</span><span><i class="fa fa-clock"></i> 26 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fee2e2;color:#dc2626;"><i class="fa fa-triangle-exclamation"></i></div>
+                <span class="badge badge-red">Risk Assess</span>
+              </div>
+              <h4>Flood Hazard Mapping & Risk Assessment</h4>
+              <p>GIS methodology for creating flood hazard zonation maps, identifying vulnerable populations, assessing exposure of critical infrastructure, and generating risk-based land use recommendations.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> January 2025</span><span><i class="fa fa-user"></i> Arun Verma</span><span><i class="fa fa-clock"></i> 20 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fa fa-water"></i></div>
+                <span class="badge badge-blue">Infrastructure</span>
+              </div>
+              <h4>Dam & Tank Catchment Analysis</h4>
+              <p>Detailed GIS analysis of dam and tank catchments for design inflow assessment, siltation estimation, and catchment treatment prioritisation to maintain water security objectives.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> December 2024</span><span><i class="fa fa-user"></i> Rajesh Pant</span><span><i class="fa fa-clock"></i> 18 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sector 4: Power & T&D -->
+        <div id="sector-4" class="tab-pane">
+          <div class="doc-grid">
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fed7aa;color:#c2410c;"><i class="fa fa-bolt"></i></div>
+                <span class="badge badge-orange">Power</span>
+              </div>
+              <h4>High Voltage Transmission Line Corridor GIS</h4>
+              <p>GIS mapping and management of HV transmission line corridors, including tower locations, ROW demarcation, clearance monitoring, and land acquisition documentation for power systems.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> March 2025</span><span><i class="fa fa-user"></i> Vikram Singh</span><span><i class="fa fa-clock"></i> 17 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fa fa-city"></i></div>
+                <span class="badge badge-blue">Distribution</span>
+              </div>
+              <h4>Distribution Network Planning & GIS</h4>
+              <p>GIS-based distribution network optimization for urban and rural areas, including feeder routing, transformer placement, load estimation by zone, and HVDS implementation planning.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> February 2025</span><span><i class="fa fa-user"></i> Neha Kapoor</span><span><i class="fa fa-clock"></i> 19 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-solar-panel"></i></div>
+                <span class="badge badge-green">Renewables</span>
+              </div>
+              <h4>Solar & Wind Farm Site Suitability Analysis</h4>
+              <p>Multi-criteria GIS analysis for renewable energy siting, including solar irradiance maps, wind resource assessment, land use compatibility, grid proximity, and environmental constraints.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> January 2025</span><span><i class="fa fa-user"></i> Ananya Das</span><span><i class="fa fa-clock"></i> 21 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-chart-line"></i></div>
+                <span class="badge badge-purple">Analytics</span>
+              </div>
+              <h4>Demand Forecasting & Load Balancing GIS</h4>
+              <p>GIS-integrated demand forecasting using spatial population data, building footprints, economic indicators, and historical consumption patterns for load balancing and capacity planning.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> December 2024</span><span><i class="fa fa-user"></i> Rajesh Nair</span><span><i class="fa fa-clock"></i> 16 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sector 5: Roads & NHAI -->
+        <div id="sector-5" class="tab-pane">
+          <div class="doc-grid">
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fa fa-road"></i></div>
+                <span class="badge badge-blue">Infrastructure</span>
+              </div>
+              <h4>National Highway Network GIS Management</h4>
+              <p>Comprehensive GIS framework for NHAI management including corridor mapping, toll plaza locations, geometric alignment, bridge and tunnel inventory, and maintenance asset tracking.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> March 2025</span><span><i class="fa fa-user"></i> Govind Sharma</span><span><i class="fa fa-clock"></i> 23 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-tree"></i></div>
+                <span class="badge badge-green">Environment</span>
+              </div>
+              <h4>Linear Project Environmental Impact GIS</h4>
+              <p>GIS methodology for environmental impact assessment of linear projects, including wildlife corridor analysis, vegetation loss mapping, water body crossings, and compensatory afforestation planning.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> February 2025</span><span><i class="fa fa-user"></i> Sanjana Menon</span><span><i class="fa fa-clock"></i> 20 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fee2e2;color:#dc2626;"><i class="fa fa-triangle-exclamation"></i></div>
+                <span class="badge badge-red">Safety</span>
+              </div>
+              <h4>Road Safety Black Spot Analysis</h4>
+              <p>GIS-based accident data analysis for identifying accident-prone road segments, spatial hotspot mapping, contributing factor analysis, and targeted intervention prioritisation.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> January 2025</span><span><i class="fa fa-user"></i> Arjun Kumar</span><span><i class="fa fa-clock"></i> 18 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-eye"></i></div>
+                <span class="badge badge-purple">Monitoring</span>
+              </div>
+              <h4>Road Condition Monitoring via Satellite</h4>
+              <p>Time-series satellite imagery analysis for road pavement condition monitoring, change detection for maintenance prioritisation, and deterioration rate modeling for budget allocation.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> December 2024</span><span><i class="fa fa-user"></i> Vikram Patel</span><span><i class="fa fa-clock"></i> 19 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sector 6: Forest & Environment -->
+        <div id="sector-6" class="tab-pane">
+          <div class="doc-grid">
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-tree"></i></div>
+                <span class="badge badge-green">Forestry</span>
+              </div>
+              <h4>Forest Cover Monitoring & Change Detection</h4>
+              <p>Satellite-based forest monitoring using NDVI analysis, change detection algorithms, and time-series analysis for tracking forest cover, regeneration, and illegal felling detection.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> March 2025</span><span><i class="fa fa-user"></i> Dr. Kiran Verma</span><span><i class="fa fa-clock"></i> 22 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#cffafe;color:#0e7490;"><i class="fa fa-leaf"></i></div>
+                <span class="badge badge-teal">Conservation</span>
+              </div>
+              <h4>Wildlife Habitat Suitability Modeling</h4>
+              <p>GIS-based species habitat modeling using MaxEnt algorithms, species occurrence data, environmental covariates, and landscape connectivity assessment for conservation planning.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> February 2025</span><span><i class="fa fa-user"></i> Neha Singh</span><span><i class="fa fa-clock"></i> 24 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fed7aa;color:#c2410c;"><i class="fa fa-fire"></i></div>
+                <span class="badge badge-orange">Risk</span>
+              </div>
+              <h4>Forest Fire Risk Mapping & Early Warning</h4>
+              <p>Multi-parameter GIS analysis combining forest type, slope, aspect, weather patterns, fuel moisture, and historical fire data for fire risk zonation and early warning systems.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> January 2025</span><span><i class="fa fa-user"></i> Arun Desai</span><span><i class="fa fa-clock"></i> 20 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-person-hiking"></i></div>
+                <span class="badge badge-purple">Management</span>
+              </div>
+              <h4>JFMC Boundary Management & Inventory</h4>
+              <p>GIS framework for Joint Forest Management Committee boundaries, resource inventory, stakeholder mapping, and village revenue overlaps for effective forest governance and benefit sharing.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> December 2024</span><span><i class="fa fa-user"></i> Sudhir Nair</span><span><i class="fa fa-clock"></i> 17 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sector 7: Panchayat Development -->
+        <div id="sector-7" class="tab-pane">
+          <div class="doc-grid">
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#cffafe;color:#0e7490;"><i class="fa fa-home"></i></div>
+                <span class="badge badge-teal">Rural Dev</span>
+              </div>
+              <h4>Village Base Map Creation & Maintenance</h4>
+              <p>Methodology for creating foundational village base maps from satellite imagery, field verification, and government records. Standards for updating base maps based on seasonal changes and development.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> March 2025</span><span><i class="fa fa-user"></i> Rajesh Mehta</span><span><i class="fa fa-clock"></i> 21 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-droplet"></i></div>
+                <span class="badge badge-green">Water</span>
+              </div>
+              <h4>Village Water Supply Coverage Planning</h4>
+              <p>GIS-based planning for universal water supply coverage in villages including source mapping, pipeline routing optimization, population accessibility analysis, and AIBP compliance.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> February 2025</span><span><i class="fa fa-user"></i> Anita Gupta</span><span><i class="fa fa-clock"></i> 19 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fa fa-road"></i></div>
+                <span class="badge badge-blue">Infrastructure</span>
+              </div>
+              <h4>Village Road Network Optimization GIS</h4>
+              <p>GIS analysis for optimizing village road networks including connectivity to schools/health centers, rural MSP assessment, habitation accessibility mapping, and maintenance planning.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> January 2025</span><span><i class="fa fa-user"></i> Vikram Sharma</span><span><i class="fa fa-clock"></i> 18 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-chart-pie"></i></div>
+                <span class="badge badge-purple">Planning</span>
+              </div>
+              <h4>PMAY Site Selection & Monitoring</h4>
+              <p>GIS-based beneficiary identification and site allocation for PM Awas Yojana, including poverty mapping, land ownership verification, and construction progress monitoring using satellite imagery.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> December 2024</span><span><i class="fa fa-user"></i> Deepak Kumar</span><span><i class="fa fa-clock"></i> 20 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sector 8: NHAI Infrastructure -->
+        <div id="sector-8" class="tab-pane">
+          <div class="doc-grid">
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fa fa-bridge"></i></div>
+                <span class="badge badge-blue">Infrastructure</span>
+              </div>
+              <h4>Toll Plaza Location & Design GIS</h4>
+              <p>GIS-based optimization for toll plaza locations considering traffic volume, vehicle composition, topography, and land use. Includes revenue forecasting and operational capacity planning.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> March 2025</span><span><i class="fa fa-user"></i> Pradeep Singh</span><span><i class="fa fa-clock"></i> 16 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#fed7aa;color:#c2410c;"><i class="fa fa-wrench"></i></div>
+                <span class="badge badge-orange">O&M</span>
+              </div>
+              <h4>Corridor Maintenance Asset Management</h4>
+              <p>GIS-based asset management system for NHAI maintenance including roadside amenities, signage inventory, electrical supply points, and condition-based maintenance scheduling.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> February 2025</span><span><i class="fa fa-user"></i> Anil Patel</span><span><i class="fa fa-clock"></i> 18 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-truck"></i></div>
+                <span class="badge badge-green">Logistics</span>
+              </div>
+              <h4>Freight Movement & Corridor Analytics</h4>
+              <p>GIS analysis of freight corridors, major commodity flows, logistics hub locations, and supply chain node mapping for NHAI planning and PM Gati Shakti corridor prioritisation.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> January 2025</span><span><i class="fa fa-user"></i> Ravi Kumar</span><span><i class="fa fa-clock"></i> 20 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-chart-bar"></i></div>
+                <span class="badge badge-purple">Analytics</span>
+              </div>
+              <h4>Traffic Volume Estimation & Forecasting</h4>
+              <p>GIS-integrated traffic demand modeling using origin-destination matrices, population distributions, economic activity centers, and historical growth patterns for revenue projections.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> December 2024</span><span><i class="fa fa-user"></i> Saurav Dutta</span><span><i class="fa fa-clock"></i> 22 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sector 9: Development Authorities -->
+        <div id="sector-9" class="tab-pane">
+          <div class="doc-grid">
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fa fa-city"></i></div>
+                <span class="badge badge-blue">Urban Planning</span>
+              </div>
+              <h4>Master Plan GIS Framework for New Cities</h4>
+              <p>Comprehensive GIS framework for greenfield city planning including zoning boundaries, land use allocation, infrastructure corridors, growth phases, and financial viability mapping.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> March 2025</span><span><i class="fa fa-user"></i> Ashok Kumar</span><span><i class="fa fa-clock"></i> 25 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#dcfce7;color:#15803d;"><i class="fa fa-tree"></i></div>
+                <span class="badge badge-green">Green Space</span>
+              </div>
+              <h4>Green Belt & Urban Forest Planning</h4>
+              <p>GIS-based green space optimization for new city development including park distribution, urban forest plantation zones, environmental buffer identification, and biodiversity conservation areas.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> February 2025</span><span><i class="fa fa-user"></i> Savita Sharma</span><span><i class="fa fa-clock"></i> 19 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#cffafe;color:#0e7490;"><i class="fa fa-layer-group"></i></div>
+                <span class="badge badge-teal">Infrastructure</span>
+              </div>
+              <h4>Integrated Utility Corridor GIS</h4>
+              <p>GIS design and management of integrated utility corridors for new cities combining power, water, sewerage, telecom, and gas pipelines with conflict resolution and access planning.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> January 2025</span><span><i class="fa fa-user"></i> Mohit Verma</span><span><i class="fa fa-clock"></i> 21 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-card-top">
+                <div class="doc-icon" style="background:#ede9fe;color:#6d28d9;"><i class="fa fa-chart-line"></i></div>
+                <span class="badge badge-purple">Planning</span>
+              </div>
+              <h4>Phased Development & Implementation GIS</h4>
+              <p>GIS-based phasing strategy for new city development tracking land acquisition, infrastructure construction progress, project sequencing, and dynamic financial modeling by phase.</p>
+              <div class="doc-meta"><span><i class="fa fa-calendar"></i> December 2024</span><span><i class="fa fa-user"></i> Rajiv Nair</span><span><i class="fa fa-clock"></i> 23 min</span></div>
+              <div class="doc-actions"><a href="#" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Read</a><a href="#" class="btn btn-sm btn-outline"><i class="fa fa-share"></i> Share</a></div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar-right">
+        <div class="sidebar-widget">
+          <h5><i class="fa fa-hashtag"></i> Popular Topics</h5>
+          <div class="tag-cloud">
+            <span class="tag">Property Tax</span>
+            <span class="tag">Land Records</span>
+            <span class="tag">Smart Cities</span>
+            <span class="tag">SVAMITVA</span>
+            <span class="tag">Digital Twin</span>
+            <span class="tag">Water GIS</span>
+            <span class="tag">Forest Cover</span>
+            <span class="tag">Highway GIS</span>
+            <span class="tag">Cadastral Mapping</span>
+            <span class="tag">Drone Survey</span>
+          </div>
+        </div>
+
+        <div class="sidebar-widget">
+          <h5><i class="fa fa-clock"></i> Recently Added</h5>
+          <ul class="recent-list">
+            <li>
+              <a href="#">Master Plan GIS Framework for New Cities</a>
+              <div class="date"><i class="fa fa-calendar"></i> March 2025</div>
+            </li>
+            <li>
+              <a href="#">Cadastral Map Digitisation Standards</a>
+              <div class="date"><i class="fa fa-calendar"></i> March 2025</div>
+            </li>
+            <li>
+              <a href="#">Irrigation Command Area Delineation</a>
+              <div class="date"><i class="fa fa-calendar"></i> March 2025</div>
+            </li>
+            <li>
+              <a href="#">National Highway Network GIS Management</a>
+              <div class="date"><i class="fa fa-calendar"></i> March 2025</div>
+            </li>
+            <li>
+              <a href="#">Property Tax GIS Integration</a>
+              <div class="date"><i class="fa fa-calendar"></i> March 2025</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="cta-card">
+          <h5><i class="fa fa-pencil"></i> Contribute</h5>
+          <p>Share your GIS expertise with the knowledge base community.</p>
+          <button><i class="fa fa-plus"></i> Submit Article</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap"><div class="logo-icon" style="width:40px;height:40px;background:linear-gradient(135deg,#2d5282,#0891b2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;">NT</div><div><div class="site-name">NeuraTwin.in</div><div class="tagline">GIS · Digital Twin · Policy Intelligence</div></div></div>
+      <p>India's definitive platform for GIS, Digital Twin, and e-governance policy intelligence.</p>
+      <div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div class="footer-col"><h5>Modules</h5><ul>
+      <li><a href="policy-library.html"><i class="fa fa-chevron-right"></i> Policy Library</a></li>
+      <li><a href="knowledge-base.html"><i class="fa fa-chevron-right"></i> Knowledge Base</a></li>
+      <li><a href="dt-guide.html"><i class="fa fa-chevron-right"></i> Digital Twin Guide</a></li>
+      <li><a href="rfp-intelligence.html"><i class="fa fa-chevron-right"></i> RFP Intelligence</a></li>
+      <li><a href="case-studies.html"><i class="fa fa-chevron-right"></i> Case Studies</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="#"><i class="fa fa-chevron-right"></i> About NeuraTwin</a></li>
+      <li><a href="compliance-compass.html"><i class="fa fa-chevron-right"></i> Compliance Compass</a></li>
+      <li><a href="tech-evaluator.html"><i class="fa fa-chevron-right"></i> Tech Evaluator</a></li>
+      <li><a href="policy-watch.html"><i class="fa fa-chevron-right"></i> Policy Watch</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Policy Alerts</h5><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:12px;">Get notified on new acts, amendments, and circulars.</p><div class="newsletter-form"><input type="email" placeholder="your@email.com"/><button>Subscribe</button></div></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p>© 2026 NeuraTwin.in · Not affiliated with any government body.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div></div></div>
+</footer>
+
+<button class="back-top"><i class="fa fa-arrow-up"></i></button>
+<script src="js/main.js"></script>
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById(this.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

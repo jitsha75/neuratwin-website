@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RFP & Tender Intelligence — NeuraTwin.in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+.filter-bar { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 32px; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
+.filter-group { display: flex; flex-direction: column; gap: 6px; }
+.filter-group label { font-size: .75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; }
+.filter-group select, .filter-group input { padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: .9rem; }
+.filter-group select:focus, .filter-group input:focus { outline: none; border-color: var(--blue); }
+.filter-btn { padding: 8px 16px; background: var(--blue); color: #fff; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+.table-wrap { overflow-x: auto; margin: 24px 0; }
+table { width: 100%; border-collapse: collapse; }
+table th { background: var(--navy); color: #fff; padding: 12px 16px; text-align: left; font-weight: 600; font-size: .9rem; }
+table td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: .85rem; }
+table tr:hover { background: var(--bg); }
+.status-active { color: var(--green); font-weight: 600; }
+.status-upcoming { color: var(--saffron); font-weight: 600; }
+.status-closed { color: var(--text-light); font-weight: 600; }
+.live-indicator { display: inline-flex; align-items: center; gap: 6px; color: #dc2626; font-weight: 600; font-size: .85rem; }
+.live-dot { width: 8px; height: 8px; background: #dc2626; border-radius: 50%; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+.sidebar-analytics { display: flex; flex-direction: column; gap: 20px; }
+.analytics-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.analytics-card h5 { color: var(--navy); margin-bottom: 12px; }
+.pie-legend { display: flex; flex-direction: column; gap: 8px; }
+.pie-item { display: flex; align-items: center; gap: 8px; font-size: .85rem; }
+.pie-color { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+.insight-box { background: var(--bg); border-left: 4px solid var(--saffron); padding: 12px; border-radius: 4px; font-size: .8rem; line-height: 1.6; }
+.insight-box strong { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left"><span><i class="fa fa-location-dot"></i> New Delhi, India</span><span>|</span><span>Updated: April 2026</span></div>
+    <div class="topbar-right"><a href="mailto:info@neuratwin.in"><i class="fa fa-envelope"></i> info@neuratwin.in</a><div class="topbar-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">NT</div>
+        <div class="logo-text"><div class="name">NeuraTwin<span style="color:var(--teal)">.in</span></div><div class="tag">GIS · Digital Twin · Policy Intelligence</div></div>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html"><i class="fa fa-house"></i> Home</a></li>
+          <li class="nav-dropdown"><a href="#"><i class="fa fa-layer-group"></i> Modules <i class="fa fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+              <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+              <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+              <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+              <a href="case-studies.html"><i class="fa fa-star"></i> Case Study Repository</a>
+              <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+              <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+              <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+            </div>
+          </li>
+          <li><a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a></li>
+          <li><a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> Tenders</a></li>
+          <li><a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search"><i class="fa fa-magnifying-glass"></i><input type="text" placeholder="Search tenders…"/></div>
+        <button class="btn-login"><i class="fa fa-user"></i> Login</button>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close"><i class="fa fa-xmark"></i></button>
+  <a href="index.html"><i class="fa fa-house"></i> Home</a>
+  <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+  <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+  <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+  <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+  <a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a>
+  <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+  <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+  <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb"><div class="container"><ol><li><a href="index.html"><i class="fa fa-house"></i> Home</a></li><li class="current">RFP & Tender Intelligence</li></ol></div></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge"><i class="fa fa-file-contract"></i> Module 04 · Active Tenders · Pipeline · Bid Analytics</div>
+    <h1>RFP &amp; Tender Intelligence</h1>
+    <p>Comprehensive database of government tenders and RFPs for GIS, spatial data, digital infrastructure, and smart city projects across India. Real-time tracking, bid analytics, and vendor intelligence.</p>
+    <div class="page-hero-meta">
+      <div class="hero-stat"><div class="live-indicator" style="margin: 0;"><span class="live-dot"></span><strong>320+</strong></div><div class="lbl">Active Tenders</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="2400" data-suffix=" Cr">2400+</div><div class="lbl">Cr Pipeline Value</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="18">18</div><div class="lbl">States Covered</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="6">6</div><div class="lbl">GIS Categories</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<section class="section-sm">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 320px; gap: 32px; align-items: start;">
+      <main>
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <div class="filter-group" style="flex: 1; min-width: 150px;">
+            <label>State</label>
+            <select>
+              <option>All States</option>
+              <option>Uttar Pradesh</option>
+              <option>Maharashtra</option>
+              <option>Karnataka</option>
+              <option>Telangana</option>
+              <option>Gujarat</option>
+              <option>Tamil Nadu</option>
+              <option>Rajasthan</option>
+              <option>Punjab</option>
+            </select>
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 180px;">
+            <label>Category</label>
+            <select>
+              <option>All Categories</option>
+              <option>GIS Survey & Mapping</option>
+              <option>Digital Twin</option>
+              <option>Smart City Solutions</option>
+              <option>Land Records Digitisation</option>
+              <option>Utility Mapping</option>
+              <option>Remote Sensing & Analysis</option>
+            </select>
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 150px;">
+            <label>Value Range (Cr)</label>
+            <input type="text" placeholder="Min-Max" />
+          </div>
+          <div class="filter-group" style="flex: 1; min-width: 130px;">
+            <label>Status</label>
+            <select>
+              <option>All</option>
+              <option>Active</option>
+              <option>Upcoming</option>
+              <option>Recently Closed</option>
+            </select>
+          </div>
+          <button class="filter-btn"><i class="fa fa-search"></i> Apply Filters</button>
+        </div>
+
+        <!-- Tender Table -->
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 12%;">Tender ID</th>
+                <th style="width: 26%;">Project Title</th>
+                <th style="width: 14%;">State/ULB</th>
+                <th style="width: 14%;">Category</th>
+                <th style="width: 11%;">Est. Value</th>
+                <th style="width: 10%;">Last Date</th>
+                <th style="width: 13%;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>GIS-2026-001</strong></td>
+                <td>GIS-Based Property Survey & Tax Mapping</td>
+                <td>Pune Municipal Corp</td>
+                <td>GIS Survey</td>
+                <td>₹12.50 Cr</td>
+                <td>2026-05-15</td>
+                <td><span class="status-active">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>SVAM-2026-045</strong></td>
+                <td>SVAMITVA Drone Survey Phase-III — UP</td>
+                <td>Uttar Pradesh (DoLR)</td>
+                <td>Drone Survey</td>
+                <td>₹45.00 Cr</td>
+                <td>2026-06-20</td>
+                <td><span class="status-active">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>DT-2026-022</strong></td>
+                <td>Digital Twin Implementation — Surat Smart City</td>
+                <td>Surat Municipal Corp</td>
+                <td>Digital Twin</td>
+                <td>₹84.00 Cr</td>
+                <td>2026-07-30</td>
+                <td><span class="status-upcoming">Upcoming</span></td>
+              </tr>
+              <tr>
+                <td><strong>DILRMP-2026-018</strong></td>
+                <td>Integrated GIS for Revenue Dept</td>
+                <td>Rajasthan (DoLR)</td>
+                <td>Land Records</td>
+                <td>₹22.00 Cr</td>
+                <td>2026-05-25</td>
+                <td><span class="status-active">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>SCM-2026-033</strong></td>
+                <td>Smart City IoT & GIS Integration</td>
+                <td>Indore Municipal Corp</td>
+                <td>Smart City</td>
+                <td>₹35.50 Cr</td>
+                <td>2026-06-10</td>
+                <td><span class="status-active">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>UM-2026-067</strong></td>
+                <td>Comprehensive Utility Mapping Project</td>
+                <td>Bangalore Jal Board</td>
+                <td>Utility Mapping</td>
+                <td>₹18.75 Cr</td>
+                <td>2026-05-05</td>
+                <td><span class="status-active">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>RS-2026-014</strong></td>
+                <td>High-Resolution Satellite Imagery Analysis</td>
+                <td>NRSC / DST</td>
+                <td>Remote Sensing</td>
+                <td>₹9.20 Cr</td>
+                <td>2026-04-28</td>
+                <td><span class="status-active">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>PMGS-2026-055</strong></td>
+                <td>PM Gati Shakti Multimodal Corridor GIS</td>
+                <td>Ministry of Commerce</td>
+                <td>GIS Mapping</td>
+                <td>₹120.00 Cr</td>
+                <td>2026-08-15</td>
+                <td><span class="status-upcoming">Upcoming</span></td>
+              </tr>
+              <tr>
+                <td><strong>SC-2026-091</strong></td>
+                <td>Safe City CCTV & GIS Integration</td>
+                <td>Mumbai Police</td>
+                <td>Smart City</td>
+                <td>₹56.80 Cr</td>
+                <td>2026-06-05</td>
+                <td><span class="status-active">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>DT-2026-003</strong></td>
+                <td>District-Level Digital Twin for Governance</td>
+                <td>Haryana (Administration)</td>
+                <td>Digital Twin</td>
+                <td>₹28.50 Cr</td>
+                <td>2026-07-12</td>
+                <td><span class="status-upcoming">Upcoming</span></td>
+              </tr>
+              <tr>
+                <td><strong>RERA-2026-029</strong></td>
+                <td>RERA Compliance GIS Platform</td>
+                <td>Telangana (RERA Authority)</td>
+                <td>GIS Survey</td>
+                <td>₹8.50 Cr</td>
+                <td>2026-05-18</td>
+                <td><span class="status-active">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>AMRUT-2026-077</strong></td>
+                <td>AMRUT 2.0 Water Supply GIS</td>
+                <td>Nagpur Municipal Corp</td>
+                <td>Utility Mapping</td>
+                <td>₹15.30 Cr</td>
+                <td>2026-05-22</td>
+                <td><span class="status-active">Active</span></td>
+              </tr>
+            </tbody>
+            <tfoot><tr><td colspan="7" style="text-align: center; padding: 16px;">Showing 12 of 320+ active tenders · <a href="#" style="color: var(--blue); font-weight: 600;">Load More →</a></td></tr></tfoot>
+          </table>
+        </div>
+
+      </main>
+
+      <!-- Sidebar Analytics -->
+      <aside class="sidebar-analytics">
+        <div class="analytics-card">
+          <h5><i class="fa fa-chart-pie"></i> By Category</h5>
+          <div class="pie-legend">
+            <div class="pie-item">
+              <div class="pie-color" style="background: #2563eb;"></div>
+              <div>GIS Survey (42%)</div>
+            </div>
+            <div class="pie-item">
+              <div class="pie-color" style="background: #0891b2;"></div>
+              <div>Smart City (28%)</div>
+            </div>
+            <div class="pie-item">
+              <div class="pie-color" style="background: #16a34a;"></div>
+              <div>Digital Twin (15%)</div>
+            </div>
+            <div class="pie-item">
+              <div class="pie-color" style="background: #ea580c;"></div>
+              <div>Land Records (10%)</div>
+            </div>
+            <div class="pie-item">
+              <div class="pie-color" style="background: #7c3aed;"></div>
+              <div>Others (5%)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h5><i class="fa fa-bar-chart"></i> Avg Value by State</h5>
+          <div style="font-size: .85rem; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between;">
+              <span>Uttar Pradesh</span>
+              <strong>₹32 Cr</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>Maharashtra</span>
+              <strong>₹28 Cr</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>Gujarat</span>
+              <strong>₹24 Cr</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>Telangana</span>
+              <strong>₹21 Cr</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>Karnataka</span>
+              <strong>₹19 Cr</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h5><i class="fa fa-building"></i> Top Awarding Agencies</h5>
+          <div style="font-size: .85rem; display: flex; flex-direction: column; gap: 10px;">
+            <div><strong>1. MoHUA</strong> (68 tenders)</div>
+            <div><strong>2. DoLR</strong> (52 tenders)</div>
+            <div><strong>3. DST/NRSC</strong> (31 tenders)</div>
+            <div><strong>4. State ULBs</strong> (124 tenders)</div>
+            <div><strong>5. Smart City SPVs</strong> (45 tenders)</div>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h5 style="margin-bottom: 16px;"><i class="fa fa-lightbulb"></i> Bid Pattern Insight</h5>
+          <div class="insight-box">
+            <strong>SVAMITVA Phase-III:</strong> Tenders show 60-80% weight on technical qualification (prior experience in drone survey, GIS processing, village-level work). Financial capability remains secondary — most successful bidders are NRSC-empanelled vendors or state GIS departments.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert alert-warn" style="margin-top: 32px;"><i class="fa fa-triangle-exclamation"></i><div><strong>Bid Pattern Alert:</strong> Recent SVAMITVA and Smart City RFPs heavily emphasize prior government project execution. Vendor pre-qualification now mandatory for contracts >₹10 Cr. Private sector GIS startups increasingly partnering with established government agencies for credibility. Digital Twin projects showing preference for comprehensive platform solutions over point products.</div></div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap"><div class="logo-icon" style="width:40px;height:40px;background:linear-gradient(135deg,#2d5282,#0891b2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;">NT</div><div><div class="site-name">NeuraTwin.in</div><div class="tagline">GIS · Digital Twin · Policy Intelligence</div></div></div>
+      <p>India's definitive platform for GIS, Digital Twin, and e-governance policy intelligence.</p>
+      <div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div class="footer-col"><h5>Modules</h5><ul>
+      <li><a href="policy-library.html"><i class="fa fa-chevron-right"></i> Policy Library</a></li>
+      <li><a href="knowledge-base.html"><i class="fa fa-chevron-right"></i> Knowledge Base</a></li>
+      <li><a href="dt-guide.html"><i class="fa fa-chevron-right"></i> Digital Twin Guide</a></li>
+      <li><a href="rfp-intelligence.html"><i class="fa fa-chevron-right"></i> RFP Intelligence</a></li>
+      <li><a href="case-studies.html"><i class="fa fa-chevron-right"></i> Case Studies</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="#"><i class="fa fa-chevron-right"></i> About NeuraTwin</a></li>
+      <li><a href="compliance-compass.html"><i class="fa fa-chevron-right"></i> Compliance Compass</a></li>
+      <li><a href="tech-evaluator.html"><i class="fa fa-chevron-right"></i> Tech Evaluator</a></li>
+      <li><a href="policy-watch.html"><i class="fa fa-chevron-right"></i> Policy Watch</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Policy Alerts</h5><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:12px;">Get notified on new acts, amendments, and circulars.</p><div class="newsletter-form"><input type="email" placeholder="your@email.com"/><button>Subscribe</button></div></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p>© 2026 NeuraTwin.in · Not affiliated with any government body.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div></div></div>
+</footer>
+
+<button class="back-top"><i class="fa fa-arrow-up"></i></button>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Regulatory Compliance Compass — NeuraTwin.in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+.compliance-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; border-bottom: 2px solid var(--border); }
+.compliance-tab-btn { padding: 12px 16px; border: none; background: none; color: var(--text-muted); font-size: .9rem; font-weight: 600; cursor: pointer; transition: var(--transition); border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.compliance-tab-btn:hover { color: var(--blue); }
+.compliance-tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
+.compliance-pane { display: none; }
+.compliance-pane.active { display: block; }
+.accordion { display: flex; flex-direction: column; gap: 12px; }
+.accordion-item { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.accordion-header { padding: 16px; background: var(--bg); cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: 600; transition: var(--transition); }
+.accordion-header:hover { background: var(--border-lt); }
+.accordion-header.active { background: var(--navy); color: #fff; }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.accordion-content.active { max-height: 500px; }
+.accordion-body { padding: 16px; background: var(--white); font-size: .85rem; }
+.accordion-body ul { margin-left: 20px; }
+.accordion-body li { margin-bottom: 8px; line-height: 1.6; }
+.compliance-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 24px 0; }
+.impact-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.impact-card h5 { color: var(--navy); margin-bottom: 12px; }
+.impact-card p { font-size: .85rem; line-height: 1.7; color: var(--text-muted); }
+.data-sovereignty-table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+.data-sovereignty-table th, .data-sovereignty-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: .85rem; }
+.data-sovereignty-table th { background: var(--navy); color: #fff; font-weight: 600; }
+.data-sovereignty-table tr:hover { background: var(--bg); }
+.badge-yes { background: #dcfce7; color: #15803d; padding: 4px 8px; border-radius: 4px; font-size: .75rem; font-weight: 700; }
+.badge-no { background: #fee2e2; color: #dc2626; padding: 4px 8px; border-radius: 4px; font-size: .75rem; font-weight: 700; }
+.badge-partial { background: #fffbeb; color: #92400e; padding: 4px 8px; border-radius: 4px; font-size: .75rem; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left"><span><i class="fa fa-location-dot"></i> New Delhi, India</span><span>|</span><span>Updated: April 2026</span></div>
+    <div class="topbar-right"><a href="mailto:info@neuratwin.in"><i class="fa fa-envelope"></i> info@neuratwin.in</a><div class="topbar-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">NT</div>
+        <div class="logo-text"><div class="name">NeuraTwin<span style="color:var(--teal)">.in</span></div><div class="tag">GIS · Digital Twin · Policy Intelligence</div></div>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html"><i class="fa fa-house"></i> Home</a></li>
+          <li class="nav-dropdown"><a href="#"><i class="fa fa-layer-group"></i> Modules <i class="fa fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+              <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+              <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+              <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+              <a href="case-studies.html"><i class="fa fa-star"></i> Case Study Repository</a>
+              <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+              <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+              <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+            </div>
+          </li>
+          <li><a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a></li>
+          <li><a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> Tenders</a></li>
+          <li><a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search"><i class="fa fa-magnifying-glass"></i><input type="text" placeholder="Search compliance rules…"/></div>
+        <button class="btn-login"><i class="fa fa-user"></i> Login</button>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close"><i class="fa fa-xmark"></i></button>
+  <a href="index.html"><i class="fa fa-house"></i> Home</a>
+  <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+  <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+  <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+  <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+  <a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a>
+  <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+  <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+  <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb"><div class="container"><ol><li><a href="index.html"><i class="fa fa-house"></i> Home</a></li><li class="current">Compliance Compass</li></ol></div></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge"><i class="fa fa-compass"></i> Module 06 · DPDP · IT Act · Data Sovereignty</div>
+    <h1>Regulatory Compliance Compass</h1>
+    <p>Navigate India's evolving data protection, information security, and data sovereignty frameworks applicable to GIS platforms, digital twins, and spatial data systems. 48 compliance checklists across 12 areas.</p>
+    <div class="page-hero-meta">
+      <div class="hero-stat"><div class="num" data-count="3">3</div><div class="lbl">Major Acts</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="12">12</div><div class="lbl">Compliance Areas</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="48">48</div><div class="lbl">Checklists</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="6">6</div><div class="lbl">Risk Areas</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<section class="section-sm">
+  <div class="container">
+    <!-- Tabs -->
+    <div class="compliance-tabs">
+      <button class="compliance-tab-btn active" data-tab="dpdp"><i class="fa fa-shield-halved"></i> DPDP Act</button>
+      <button class="compliance-tab-btn" data-tab="it-act"><i class="fa fa-lock"></i> IT Act</button>
+      <button class="compliance-tab-btn" data-tab="data-sovereignty"><i class="fa fa-map"></i> Data Sovereignty</button>
+      <button class="compliance-tab-btn" data-tab="spatial-data"><i class="fa fa-globe"></i> Spatial Data Rules</button>
+    </div>
+
+    <!-- DPDP Tab -->
+    <div id="dpdp" class="compliance-pane active">
+      <div class="alert alert-warn mb-24"><i class="fa fa-triangle-exclamation"></i><div><strong>Critical Timeline:</strong> DPDP Rules 2025 notified in January 2025. Compliance required within 12 months for Significant Data Fiduciaries. Most GIS platforms handling citizen data will qualify as SDF. Failure to comply triggers ₹50 Cr penalties or 3% annual turnover.</div></div>
+
+      <h3 style="color: var(--navy); margin-bottom: 24px;">DPDP Compliance Checklist</h3>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header active"><i class="fa fa-user-check"></i> Data Collection & Consent</div>
+          <div class="accordion-content active">
+            <div class="accordion-body">
+              <ul>
+                <li>☐ Consent mechanism documented for all personal data (citizen PII, property ownership, grievance data)</li>
+                <li>☐ Consent notices provided in Hindi + local language, not just English</li>
+                <li>☐ Purpose of collection explicitly stated (e.g., "property tax assessment", "service delivery")</li>
+                <li>☐ Granular consent for specific uses (aggregation, analytics, third-party sharing)</li>
+                <li>☐ Digital consent records maintained with audit trail</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-target"></i> Purpose Limitation & Data Minimisation</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul>
+                <li>☐ Data processing limited to stated purpose — no repurposing without fresh consent</li>
+                <li>☐ Only necessary personal data collected (no over-collection for "future use")</li>
+                <li>☐ Personal data stripped/anonymised for analytics and non-citizen-facing dashboards</li>
+                <li>☐ Processing agreements with third parties (cloud providers, integrators) documented</li>
+                <li>☐ Data flow diagram showing where citizen data travels within and outside system</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-trash"></i> Data Retention & Deletion Policy</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul>
+                <li>☐ Retention schedule defined for each data category (e.g., grievances deleted after 2 years)</li>
+                <li>☐ Deletion mechanism implemented — automatic purge or manual deletion on request</li>
+                <li>☐ "Right to be forgotten" process documented for citizen requests</li>
+                <li>☐ Deletion from both primary and backup systems (not just primary)</li>
+                <li>☐ Legal holds documented for cases under litigation or audit</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-lock"></i> Data Security & Encryption</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul>
+                <li>☐ Encryption in transit (TLS 1.2+) for all citizen data transfers</li>
+                <li>☐ Encryption at rest (AES-256) for personal data in databases</li>
+                <li>☐ Key management policy documented — no hardcoded keys in code</li>
+                <li>☐ Access controls implemented — role-based, least privilege</li>
+                <li>☐ Multi-factor authentication for admin/sensitive data access</li>
+                <li>☐ Security audit and penetration testing completed annually</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-exclamation-triangle"></i> Breach Notification & Accountability</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul>
+                <li>☐ Data breach incident response plan documented</li>
+                <li>☐ Notification to affected data principals within 30 days of breach discovery</li>
+                <li>☐ DPIB (Data Protection Impact Board) notified for breaches affecting >1000 individuals</li>
+                <li>☐ Breach register maintained with incident date, type, number affected, remediation</li>
+                <li>☐ Data Protection Officer (DPO) appointed and contact details published</li>
+                <li>☐ Staff training on data handling and breach protocols completed</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="color: var(--navy); margin-top: 32px; margin-bottom: 24px;">Impact on GIS Platforms</h3>
+      <div class="compliance-cards">
+        <div class="impact-card">
+          <h5><i class="fa fa-city"></i> Citizen-Facing GIS Portals</h5>
+          <p><strong>Obligations:</strong> Property tax portals, grievance mapping apps, and public service dashboards must implement granular consent for location data, PII viewing, and any analytics. Restrict dashboard drill-down by ward/zone to prevent individual identification. Implement right-to-be-forgotten workflow.</p>
+        </div>
+        <div class="impact-card">
+          <h5><i class="fa fa-tower-broadcast"></i> Survey Data Platforms</h5>
+          <p><strong>Obligations:</strong> SVAMITVA, DILRMP, and urban survey platforms collecting property-holder details must separate personal data (name, age, contact) from property spatial data. Use UUID linking, not personal identifiers, in spatial layers. Anonymise historical survey versions.</p>
+        </div>
+        <div class="impact-card">
+          <h5><i class="fa fa-scroll"></i> Property & Cadastral Systems</h5>
+          <p><strong>Obligations:</strong> Land record systems must mask landowner PII in public-facing maps and reports. Admin-only views can show details. Implement audit trail for all PII access. Restrict third-party integrations (e.g., property valuation platforms) via processing agreements defining scope and purpose.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- IT Act Tab -->
+    <div id="it-act" class="compliance-pane">
+      <h3 style="color: var(--navy); margin-bottom: 24px;">IT Act 2000 — Key Sections for GIS</h3>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-shield"></i> Section 43A — Data Protection Obligation</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p><strong>Applicability:</strong> All body corporates collecting sensitive personal data via GIS platforms.</p>
+              <p style="margin-top: 8px;"><strong>Requirement:</strong> Implement "reasonable security practices" to protect personal data from unauthorised access, modification, destruction. Failure results in liability up to ₹5 Cr + criminal penalties.</p>
+              <p style="margin-top: 8px;"><strong>GIS Impact:</strong> Property tax portals, utility mapping with customer details, smart city IoT data must implement security measures. DPDP Rules now provide more specific guidance than Section 43A alone.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-ear-listen"></i> Section 69 — Lawful Interception</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p><strong>Applicability:</strong> Central/state agencies can intercept GIS platform communications for national security, public order, or criminal investigation.</p>
+              <p style="margin-top: 8px;"><strong>Requirement:</strong> GIS platform owners must comply with lawful interception requests from law enforcement. Cannot refuse or delay. Confidentiality of interception orders maintained.</p>
+              <p style="margin-top: 8px;"><strong>GIS Impact:</strong> Smart city CCTV-GIS integration and citizen grievance platforms may be subject to surveillance. Platforms must maintain logs of all data access for potential audit. No encryption can prevent lawful interception.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-globe"></i> Section 79 — Intermediary Liability Safe Harbour</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <p><strong>Applicability:</strong> GIS platforms acting as intermediaries (hosting user-generated content, grievance data, citizen reports) can claim safe harbour from liability.</p>
+              <p style="margin-top: 8px;"><strong>Requirement:</strong> Implement content moderation, CoC policies, respond to legal takedown notices within 72 hours, preserve evidence for law enforcement, no knowledge of/inducement of illegal activity.</p>
+              <p style="margin-top: 8px;"><strong>GIS Impact:</strong> Citizen grievance mapping and participatory GIS platforms must monitor for illegal content (property disputes, harassment). Remove flagged data promptly. Maintain compliance records.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top: 32px;"><i class="fa fa-circle-info"></i><div><strong>Note:</strong> IT Act provisions remain in force alongside DPDP Act. GIS platforms must comply with BOTH regimes. Where DPDP provides more stringent requirements (e.g., consent, transparency), DPDP takes precedence. IT Act continues to govern cybersecurity, intermediary liability, and lawful interception.</div></div>
+    </div>
+
+    <!-- Data Sovereignty Tab -->
+    <div id="data-sovereignty" class="compliance-pane">
+      <h3 style="color: var(--navy); margin-bottom: 24px;">Data Sovereignty & Storage Requirements</h3>
+      <p style="margin-bottom: 24px; font-size: .95rem;">India increasingly mandates data localisation for sensitive categories. GIS platforms must understand where different data types can be stored and processed.</p>
+
+      <table class="data-sovereignty-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Storage Requirement</th>
+            <th>Cloud OK?</th>
+            <th>Foreign Access?</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Citizen PII</strong> (name, address, phone, email)</td>
+            <td>India only (DPDP)</td>
+            <td><span class="badge-partial">MeitY cloud</span></td>
+            <td><span class="badge-no">No</span></td>
+            <td>DPDP mandates processing in India. Can use MeitY-empanelled CSPs (AWS, Azure, GCP India regions). NO foreign data transfer except for processing agreement.</td>
+          </tr>
+          <tr>
+            <td><strong>Cadastral Data</strong> (survey maps, property boundaries, RoR)</td>
+            <td>India only (SOI licensing)</td>
+            <td><span class="badge-partial">On-prem/MeitY</span></td>
+            <td><span class="badge-no">No</span></td>
+            <td>Survey of India licensing restricts foreign access. Private sector must store in India. Government agencies can use cloud per empanelled CSP policy. Attribution to SOI required.</td>
+          </tr>
+          <tr>
+            <td><strong>Defence/Security-Sensitive Data</strong> (border areas, security infrastructure maps)</td>
+            <td>India only (Classified)</td>
+            <td><span class="badge-no">No</span></td>
+            <td><span class="badge-no">No</span></td>
+            <td>Classified data under Official Secrets Act must NOT be cloud-stored. On-premises in secure facilities only. Requires security clearance for access.</td>
+          </tr>
+          <tr>
+            <td><strong>Revenue Records</strong> (mutation, RoR, tax data)</td>
+            <td>India only (DoLR)</td>
+            <td><span class="badge-yes">MeitY cloud</span></td>
+            <td><span class="badge-no">No</span></td>
+            <td>DILRMP systems must store in India. MeitY empanelled CSPs permitted. Some state DoLRs mandate on-prem only — verify state-specific policy.</td>
+          </tr>
+          <tr>
+            <td><strong>IoT Sensor Data</strong> (real-time: traffic, air quality, water)</td>
+            <td>Flexible (no restriction)</td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td><span class="badge-partial">Check terms</span></td>
+            <td>No data localisation mandate for sensor streams. Can use global cloud. If linked to citizen/location data, apply relevant restrictions.</td>
+          </tr>
+          <tr>
+            <td><strong>Satellite Imagery & Aerial Data</strong> (high-res imagery)</td>
+            <td>India storage (DPMSO guidelines)</td>
+            <td><span class="badge-partial">On-prem preferred</span></td>
+            <td><span class="badge-no">No</span></td>
+            <td>Geospatial Guidelines 2021 permit civilian high-res imagery collection, but storage restrictions apply to 10m+ resolution data. Foreign sharing restricted. SOI approval for national-level distribution.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-warn" style="margin-top: 24px;"><i class="fa fa-triangle-exclamation"></i><div><strong>Cloud Compliance Risk:</strong> Many GIS projects default to global cloud providers (AWS US, Azure global) without checking data type restrictions. Storing Indian citizen PII or cadastral data in foreign data centres violates DPDP and SOI licensing. Always architect for India-region-only storage for sensitive layers. Use AWS Mumbai, Azure India, GCP Delhi regions for MeitY-empanelled services.</div></div>
+    </div>
+
+    <!-- Spatial Data Rules Tab -->
+    <div id="spatial-data" class="compliance-pane">
+      <h3 style="color: var(--navy); margin-bottom: 24px;">Geospatial Data Guidelines 2021 & NSDI Compliance</h3>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-map"></i> Geospatial Data Acquisition & Liberalisation</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul>
+                <li>☐ Drone surveys permitted for civilians without SoI/MoD approval (under DST liberalisation 2021)</li>
+                <li>☐ Foreign data sources (Google imagery, Copernicus) accessible but attribution required</li>
+                <li>☐ Accuracy: Sub-meter civilian acquisition permitted. <10m resolution imagery open-source</li>
+                <li>☐ Restricted areas: Border zones (100 km) require additional approvals from DGPS/DST</li>
+                <li>☐ Private commercial GIS data collection now permitted — must register with DST portal</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-sitemap"></i> NSDI Compliance & Interoperability</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul>
+                <li>☐ Spatial data adheres to NSDI standards (WGS84 UTM projection for India)</li>
+                <li>☐ Metadata recorded in standardized Dublin Core + ISO 19115 format</li>
+                <li>☐ Data shared via NSDI-compliant APIs and WMS/WFS services</li>
+                <li>☐ ISO/IEC 19115 metadata mandatory for all government spatial data (data.gov.in registration)</li>
+                <li>☐ Unique dataset identifiers and version control implemented</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <div class="accordion-header"><i class="fa fa-balance-scale"></i> SoI Attribution & Licensing</div>
+          <div class="accordion-content">
+            <div class="accordion-body">
+              <ul>
+                <li>☐ All Survey of India base maps include SoI copyright notice and attribution</li>
+                <li>☐ Derivative maps from SoI must cite source (e.g., "Based on SoI Topomap")</li>
+                <li>☐ SoI licensing for digital topo maps followed (Open data policy for 1:50k+)</li>
+                <li>☐ No modification of SoI base layers without explicit license</li>
+                <li>☐ NIC-issued SoI historical imagery properly cited with date and source classification</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap"><div class="logo-icon" style="width:40px;height:40px;background:linear-gradient(135deg,#2d5282,#0891b2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;">NT</div><div><div class="site-name">NeuraTwin.in</div><div class="tagline">GIS · Digital Twin · Policy Intelligence</div></div></div>
+      <p>India's definitive platform for GIS, Digital Twin, and e-governance policy intelligence.</p>
+      <div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div class="footer-col"><h5>Modules</h5><ul>
+      <li><a href="policy-library.html"><i class="fa fa-chevron-right"></i> Policy Library</a></li>
+      <li><a href="knowledge-base.html"><i class="fa fa-chevron-right"></i> Knowledge Base</a></li>
+      <li><a href="dt-guide.html"><i class="fa fa-chevron-right"></i> Digital Twin Guide</a></li>
+      <li><a href="rfp-intelligence.html"><i class="fa fa-chevron-right"></i> RFP Intelligence</a></li>
+      <li><a href="case-studies.html"><i class="fa fa-chevron-right"></i> Case Studies</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="#"><i class="fa fa-chevron-right"></i> About NeuraTwin</a></li>
+      <li><a href="compliance-compass.html"><i class="fa fa-chevron-right"></i> Compliance Compass</a></li>
+      <li><a href="tech-evaluator.html"><i class="fa fa-chevron-right"></i> Tech Evaluator</a></li>
+      <li><a href="policy-watch.html"><i class="fa fa-chevron-right"></i> Policy Watch</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Policy Alerts</h5><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:12px;">Get notified on new acts, amendments, and circulars.</p><div class="newsletter-form"><input type="email" placeholder="your@email.com"/><button>Subscribe</button></div></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p>© 2026 NeuraTwin.in · Not affiliated with any government body.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div></div></div>
+</footer>
+
+<button class="back-top"><i class="fa fa-arrow-up"></i></button>
+<script src="js/main.js"></script>
+<script>
+document.querySelectorAll('.compliance-tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.compliance-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.compliance-pane').forEach(p => p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById(this.dataset.tab).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.accordion-header').forEach(header => {
+  header.addEventListener('click', function() {
+    const isActive = this.classList.contains('active');
+    document.querySelectorAll('.accordion-header').forEach(h => {
+      h.classList.remove('active');
+      h.nextElementSibling.classList.remove('active');
+    });
+    if (!isActive) {
+      this.classList.add('active');
+      this.nextElementSibling.classList.add('active');
+    }
+  });
+});
+</script>
+</body>
+</html>

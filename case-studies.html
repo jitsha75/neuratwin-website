@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Case Study Repository — NeuraTwin.in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/style.css"/>
+<style>
+.tag-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.tag-filter .filter-tag { padding: 8px 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-size: .85rem; cursor: pointer; transition: var(--transition); }
+.tag-filter .filter-tag.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 24px; }
+.case-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
+.case-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.case-header { padding: 20px; border-bottom: 4px solid var(--navy); }
+.case-header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.case-badge { display: inline-block; padding: 4px 10px; background: var(--bg); border-radius: 4px; font-size: .72rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); }
+.case-badge.svamitva { background: #dcfce7; color: #15803d; }
+.case-badge.dilrmp { background: #ede9fe; color: #6d28d9; }
+.case-badge.smart-city { background: #dbeafe; color: #1d4ed8; }
+.case-badge.digital-twin { background: #cffafe; color: #0e7490; }
+.case-header h4 { color: var(--navy); margin-bottom: 8px; font-size: 1rem; }
+.case-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: .8rem; color: var(--text-muted); margin-bottom: 12px; }
+.case-meta i { margin-right: 3px; }
+.case-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+.case-summary { color: var(--text-muted); font-size: .85rem; line-height: 1.6; }
+.case-outcomes { display: flex; flex-direction: column; gap: 6px; }
+.case-outcomes li { font-size: .8rem; color: var(--text-muted); margin-left: 20px; list-style: disc; }
+.case-footer { padding: 16px 20px; border-top: 1px solid var(--border-lt); display: flex; gap: 8px; }
+.case-footer button, .case-footer a { flex: 1; padding: 8px 12px; border: none; border-radius: 6px; font-size: .8rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; transition: var(--transition); }
+.case-footer .btn-primary { background: var(--navy); color: #fff; }
+.case-footer .btn-primary:hover { background: var(--navy-light); }
+.case-footer .btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+.case-footer .btn-secondary:hover { background: var(--border-lt); }
+.lessons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 32px 0; }
+.lesson-card { background: linear-gradient(135deg,var(--bg),var(--bg-alt)); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.lesson-card h5 { color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.lesson-card p { font-size: .85rem; line-height: 1.7; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left"><span><i class="fa fa-location-dot"></i> New Delhi, India</span><span>|</span><span>Updated: April 2026</span></div>
+    <div class="topbar-right"><a href="mailto:info@neuratwin.in"><i class="fa fa-envelope"></i> info@neuratwin.in</a><div class="topbar-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a></div></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">NT</div>
+        <div class="logo-text"><div class="name">NeuraTwin<span style="color:var(--teal)">.in</span></div><div class="tag">GIS · Digital Twin · Policy Intelligence</div></div>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html"><i class="fa fa-house"></i> Home</a></li>
+          <li class="nav-dropdown"><a href="#"><i class="fa fa-layer-group"></i> Modules <i class="fa fa-chevron-down"></i></a>
+            <div class="dropdown-menu">
+              <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+              <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+              <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+              <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+              <a href="case-studies.html"><i class="fa fa-star"></i> Case Study Repository</a>
+              <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+              <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+              <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+            </div>
+          </li>
+          <li><a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a></li>
+          <li><a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> Tenders</a></li>
+          <li><a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="header-search"><i class="fa fa-magnifying-glass"></i><input type="text" placeholder="Search case studies…"/></div>
+        <button class="btn-login"><i class="fa fa-user"></i> Login</button>
+        <button class="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <button class="mobile-nav-close"><i class="fa fa-xmark"></i></button>
+  <a href="index.html"><i class="fa fa-house"></i> Home</a>
+  <a href="policy-library.html"><i class="fa fa-scale-balanced"></i> Policy & Regulatory Library</a>
+  <a href="knowledge-base.html"><i class="fa fa-book-open"></i> Domain Knowledge Base</a>
+  <a href="dt-guide.html"><i class="fa fa-cube"></i> Digital Twin Guide</a>
+  <a href="rfp-intelligence.html"><i class="fa fa-file-contract"></i> RFP & Tender Intelligence</a>
+  <a href="case-studies.html"><i class="fa fa-star"></i> Case Studies</a>
+  <a href="compliance-compass.html"><i class="fa fa-compass"></i> Compliance Compass</a>
+  <a href="tech-evaluator.html"><i class="fa fa-microchip"></i> Tech Stack Evaluator</a>
+  <a href="policy-watch.html"><i class="fa fa-newspaper"></i> Policy Watch</a>
+</div>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb"><div class="container"><ol><li><a href="index.html"><i class="fa fa-house"></i> Home</a></li><li class="current">Case Study Repository</li></ol></div></div>
+
+<!-- Page Hero -->
+<div class="page-hero">
+  <div class="container">
+    <div class="hero-badge"><i class="fa fa-star"></i> Module 05 · Real Projects · Real Results · Real Learning</div>
+    <h1>Case Study Repository</h1>
+    <p>Documented successes and lessons learned from 47 GIS, digital twin, and spatial data projects across India. Covering ₹4,200+ crore in implemented projects, 18 states, and 9 governance sectors.</p>
+    <div class="page-hero-meta">
+      <div class="hero-stat"><div class="num" data-count="47">47</div><div class="lbl">Case Studies</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="18">18</div><div class="lbl">States</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="4200" data-suffix=" Cr">4,200</div><div class="lbl">Documented Value</div></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><div class="num" data-count="9">9</div><div class="lbl">Sectors</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<section class="section-sm">
+  <div class="container">
+    <!-- Filter Tags -->
+    <div class="tag-filter">
+      <span class="filter-tag active" data-filter="all">All</span>
+      <span class="filter-tag" data-filter="svamitva"><i class="fa fa-house-chimney"></i> SVAMITVA</span>
+      <span class="filter-tag" data-filter="dilrmp"><i class="fa fa-map-location-dot"></i> DILRMP</span>
+      <span class="filter-tag" data-filter="smart-city"><i class="fa fa-city"></i> Smart City</span>
+      <span class="filter-tag" data-filter="digital-twin"><i class="fa fa-cube"></i> Digital Twin</span>
+      <span class="filter-tag" data-filter="safe-city"><i class="fa fa-camera"></i> Safe City</span>
+      <span class="filter-tag" data-filter="land-records"><i class="fa fa-scroll"></i> Land Records</span>
+      <span class="filter-tag" data-filter="gis-survey"><i class="fa fa-map"></i> GIS Survey</span>
+      <span class="filter-tag" data-filter="amrut"><i class="fa fa-water"></i> AMRUT</span>
+    </div>
+
+    <!-- Case Study Grid -->
+    <div class="case-grid">
+      <!-- Case 1: SVAMITVA UP -->
+      <div class="case-card" data-category="svamitva">
+        <div class="case-header" style="border-bottom-color: #16a34a;">
+          <div class="case-header-top">
+            <h4>SVAMITVA — Uttar Pradesh Phase I</h4>
+            <span class="case-badge svamitva">SVAMITVA</span>
+          </div>
+          <div class="case-meta">
+            <i class="fa fa-map"></i> Uttar Pradesh
+            <i class="fa fa-coins"></i> ₹180 Cr
+            <i class="fa fa-calendar"></i> 2020-22
+          </div>
+        </div>
+        <div class="case-body">
+          <p class="case-summary">Drone-based mapping of 25,000+ inhabited villages across UP, creation of property cards for 18 lakh households, and integration with revenue records. Pioneer project demonstrating drone survey scalability in rural India.</p>
+          <div class="case-outcomes">
+            <strong style="color: var(--navy); font-size: .9rem;">Key Outcomes:</strong>
+            <ul>
+              <li>25,000 villages mapped with <2cm GSD drone orthomosaic</li>
+              <li>18 lakh property cards issued to rural households</li>
+              <li>Land rights digitised and integrated with SVAMITVA portal</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-footer">
+          <button class="btn-primary"><i class="fa fa-eye"></i> Read Study</button>
+          <button class="btn-secondary"><i class="fa fa-share"></i> Share</button>
+        </div>
+      </div>
+
+      <!-- Case 2: Bhopal DT -->
+      <div class="case-card" data-category="digital-twin">
+        <div class="case-header" style="border-bottom-color: #0891b2;">
+          <div class="case-header-top">
+            <h4>Bhopal Smart City Digital Twin</h4>
+            <span class="case-badge digital-twin">DIGITAL TWIN</span>
+          </div>
+          <div class="case-meta">
+            <i class="fa fa-map"></i> Madhya Pradesh
+            <i class="fa fa-coins"></i> ₹84 Cr
+            <i class="fa fa-calendar"></i> 2022-24
+          </div>
+        </div>
+        <div class="case-body">
+          <p class="case-summary">Comprehensive 3D city model integrating 18 spatial data layers, real-time IoT feeds (traffic, air quality, water supply), and citizen service portal. Backend for Bhopal Smart City operations and urban planning.</p>
+          <div class="case-outcomes">
+            <strong style="color: var(--navy); font-size: .9rem;">Key Outcomes:</strong>
+            <ul>
+              <li>18 data layers integrated — spatial + real-time streams</li>
+              <li>23% improvement in asset management efficiency</li>
+              <li>IoT-enabled predictive maintenance for water supply</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-footer">
+          <button class="btn-primary"><i class="fa fa-eye"></i> Read Study</button>
+          <button class="btn-secondary"><i class="fa fa-share"></i> Share</button>
+        </div>
+      </div>
+
+      <!-- Case 3: DILRMP Telangana -->
+      <div class="case-card" data-category="dilrmp">
+        <div class="case-header" style="border-bottom-color: #7c3aed;">
+          <div class="case-header-top">
+            <h4>DILRMP Telangana — DHARANI Portal</h4>
+            <span class="case-badge dilrmp">DILRMP</span>
+          </div>
+          <div class="case-meta">
+            <i class="fa fa-map"></i> Telangana
+            <i class="fa fa-coins"></i> ₹240 Cr
+            <i class="fa fa-calendar"></i> 2020-23
+          </div>
+        </div>
+        <div class="case-body">
+          <p class="case-summary">Complete digitisation of Telangana land records including RoR, mutation, and registration. DHARANI portal integration enabling single-window citizen access to land record services and GIS-based property verification.</p>
+          <div class="case-outcomes">
+            <strong style="color: var(--navy); font-size: .9rem;">Key Outcomes:</strong>
+            <ul>
+              <li>100% digitisation of all revenue records across state</li>
+              <li>DHARANI portal processes 5,000+ daily transactions</li>
+              <li>Property disputes reduced by 40% via spatial verification</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-footer">
+          <button class="btn-primary"><i class="fa fa-eye"></i> Read Study</button>
+          <button class="btn-secondary"><i class="fa fa-share"></i> Share</button>
+        </div>
+      </div>
+
+      <!-- Case 4: Pune Property Tax -->
+      <div class="case-card" data-category="gis-survey">
+        <div class="case-header" style="border-bottom-color: #1d4ed8;">
+          <div class="case-header-top">
+            <h4>Pune PCMC GIS-Based Property Tax</h4>
+            <span class="case-badge smart-city">GIS SURVEY</span>
+          </div>
+          <div class="case-meta">
+            <i class="fa fa-map"></i> Maharashtra
+            <i class="fa fa-coins"></i> ₹12.5 Cr
+            <i class="fa fa-calendar"></i> 2021-23
+          </div>
+        </div>
+        <div class="case-body">
+          <p class="case-summary">Drone survey and GIS-based property tax assessment for Pune Corporation covering 7+ lakh properties. Integration of satellite-derived building footprints with revenue records for accurate tax base estimation.</p>
+          <div class="case-outcomes">
+            <strong style="color: var(--navy); font-size: .9rem;">Key Outcomes:</strong>
+            <ul>
+              <li>340% increase in tax collection post-GIS integration</li>
+              <li>Detection of 1.2 lakh missing/unauthorised structures</li>
+              <li>Property disputes reduced through transparent GIS-based assessment</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-footer">
+          <button class="btn-primary"><i class="fa fa-eye"></i> Read Study</button>
+          <button class="btn-secondary"><i class="fa fa-share"></i> Share</button>
+        </div>
+      </div>
+
+      <!-- Case 5: Amaravati Capital City -->
+      <div class="case-card" data-category="smart-city">
+        <div class="case-header" style="border-bottom-color: #ea580c;">
+          <div class="case-header-top">
+            <h4>Amaravati Capital City GIS Master Plan</h4>
+            <span class="case-badge smart-city">SMART CITY</span>
+          </div>
+          <div class="case-meta">
+            <i class="fa fa-map"></i> Andhra Pradesh
+            <i class="fa fa-coins"></i> ₹320 Cr
+            <i class="fa fa-calendar"></i> 2016-19
+          </div>
+        </div>
+        <div class="case-body">
+          <p class="case-summary">Greenfield city planning using comprehensive GIS including master plan spatial encoding, utility corridor design, and environmental assessment. Landmark example of GIS-first city planning in India.</p>
+          <div class="case-outcomes">
+            <strong style="color: var(--navy); font-size: .9rem;">Key Outcomes:</strong>
+            <ul>
+              <li>Master plan fully encoded in GIS with 45 spatial layers</li>
+              <li>Utility network design (water, power, waste) optimised via GIS</li>
+              <li>Environmental zoning and green space planning integrated</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-footer">
+          <button class="btn-primary"><i class="fa fa-eye"></i> Read Study</button>
+          <button class="btn-secondary"><i class="fa fa-share"></i> Share</button>
+        </div>
+      </div>
+
+      <!-- Case 6: Gujarat BISAG-N -->
+      <div class="case-card" data-category="land-records">
+        <div class="case-header" style="border-bottom-color: #0891b2;">
+          <div class="case-header-top">
+            <h4>Gujarat BISAG-N Revenue GIS Integration</h4>
+            <span class="case-badge dilrmp">LAND RECORDS</span>
+          </div>
+          <div class="case-meta">
+            <i class="fa fa-map"></i> Gujarat
+            <i class="fa fa-coins"></i> ₹95 Cr
+            <i class="fa fa-calendar"></i> 2018-22
+          </div>
+        </div>
+        <div class="case-body">
+          <p class="case-summary">Integration of cadastral maps from all 33 districts of Gujarat into unified GIS. BISAG-N platform linking land records with property tax, mutation processing, and citizen services.</p>
+          <div class="case-outcomes">
+            <strong style="color: var(--navy); font-size: .9rem;">Key Outcomes:</strong>
+            <ul>
+              <li>All 33 districts' maps digitised and harmonised</li>
+              <li>Mutation processing time reduced from 60 to 15 days</li>
+              <li>Online property verification portal serves 10,000+ daily queries</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-footer">
+          <button class="btn-primary"><i class="fa fa-eye"></i> Read Study</button>
+          <button class="btn-secondary"><i class="fa fa-share"></i> Share</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lessons Learned -->
+    <div style="margin-top: 64px;">
+      <h2 style="color: var(--navy); margin-bottom: 32px;"><i class="fa fa-lightbulb"></i> Key Lessons Learned from Project Portfolio</h2>
+      <div class="lessons-grid">
+        <div class="lesson-card">
+          <h5><i class="fa fa-database"></i> Data Quality is Non-Negotiable</h5>
+          <p>The most successful projects (Bhopal DT, Telangana DILRMP, Pune PCMC) invested heavily in data quality assurance during acquisition phase. Projects that rushed data collection faced 18-24 month delays in operationalisation due to conflicting boundaries, missing attributes, and user distrust.</p>
+        </div>
+        <div class="lesson-card">
+          <h5><i class="fa fa-users"></i> Stakeholder Alignment Precedes Technology</h5>
+          <p>SVAMITVA UP's success stemmed from early alignment with village revenue records keepers and gram panchayats. Conversely, early-stage Smart City projects failed due to insufficient coordination between ULB departments. Build governance structures before deploying platforms.</p>
+        </div>
+        <div class="lesson-card">
+          <h5><i class="fa fa-warning"></i> Technology Lock-In Creates Long-Term Costs</h5>
+          <p>Several projects discovered proprietary platform switching costs (15-40% of original investment) when moving to next-generation solutions. Amaravati's master plan GIS faced interoperability challenges migrating from proprietary to open-source. Recommend open standards and APIs from inception.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap"><div class="logo-icon" style="width:40px;height:40px;background:linear-gradient(135deg,#2d5282,#0891b2);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:1rem;">NT</div><div><div class="site-name">NeuraTwin.in</div><div class="tagline">GIS · Digital Twin · Policy Intelligence</div></div></div>
+      <p>India's definitive platform for GIS, Digital Twin, and e-governance policy intelligence.</p>
+      <div class="footer-social"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-x-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+    </div>
+    <div class="footer-col"><h5>Modules</h5><ul>
+      <li><a href="policy-library.html"><i class="fa fa-chevron-right"></i> Policy Library</a></li>
+      <li><a href="knowledge-base.html"><i class="fa fa-chevron-right"></i> Knowledge Base</a></li>
+      <li><a href="dt-guide.html"><i class="fa fa-chevron-right"></i> Digital Twin Guide</a></li>
+      <li><a href="rfp-intelligence.html"><i class="fa fa-chevron-right"></i> RFP Intelligence</a></li>
+      <li><a href="case-studies.html"><i class="fa fa-chevron-right"></i> Case Studies</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Quick Links</h5><ul>
+      <li><a href="#"><i class="fa fa-chevron-right"></i> About NeuraTwin</a></li>
+      <li><a href="compliance-compass.html"><i class="fa fa-chevron-right"></i> Compliance Compass</a></li>
+      <li><a href="tech-evaluator.html"><i class="fa fa-chevron-right"></i> Tech Evaluator</a></li>
+      <li><a href="policy-watch.html"><i class="fa fa-chevron-right"></i> Policy Watch</a></li>
+    </ul></div>
+    <div class="footer-col"><h5>Policy Alerts</h5><p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:12px;">Get notified on new acts, amendments, and circulars.</p><div class="newsletter-form"><input type="email" placeholder="your@email.com"/><button>Subscribe</button></div></div>
+  </div></div></div>
+  <div class="container"><div class="footer-bottom"><p>© 2026 NeuraTwin.in · Not affiliated with any government body.</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div></div></div>
+</footer>
+
+<button class="back-top"><i class="fa fa-arrow-up"></i></button>
+<script src="js/main.js"></script>
+<script>
+document.querySelectorAll('.filter-tag').forEach(tag => {
+  tag.addEventListener('click', function() {
+    document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.dataset.filter;
+    document.querySelectorAll('.case-card').forEach(card => {
+      if (filter === 'all' || card.dataset.category === filter) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
